@@ -15,5 +15,6 @@ Changes follow semantic versioning. Until 1.0, minor releases may revise adapter
 - Show per-turn measurements in HTML when aggregate usage is unavailable.
 - Accept native startup error diagnostics without admitting tool activity outside turns.
 - Add an opt-in, isolated Codex CLI probe with a loopback mock provider and a captured synthetic regression fixture.
+- Document one authorized real-model export smoke test with source-matched usage counters; keep its transcript local and excluded from distribution.
 
 No npm package, GitHub release, or real-model benchmark has been published.

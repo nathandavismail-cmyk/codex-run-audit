@@ -12,6 +12,12 @@ Unsupported: raw `~/.codex/sessions` rollouts, app-server protocol streams, mult
 
 Before declaring native compatibility, preserve a consented scrubbed real export with exact Codex version, source surface, independently expected measurements, and permission to distribute the fixture. Do not run a new model task or expose private history merely to satisfy this gate.
 
+A user-authorized [live smoke test](live-validation.md) now establishes one
+successful no-tool export from CLI `0.162.0-alpha.17.2`. Its scrubbed capture is
+local and excluded from distribution. This does not satisfy broad release
+certification or independent token-meter verification; additional tool/failure
+coverage and a distributable real fixture remain pending.
+
 ## Native serialization probe
 
 On 2026-10-11, `codex-cli 0.162.0-alpha.17.2` on macOS arm64 emitted an
