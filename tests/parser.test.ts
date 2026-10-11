@@ -258,3 +258,70 @@ test('synthetic demonstration has known accounting and explicit labeling', async
   assert.ok(renderReport(r).includes('Synthetic demonstration'));
   assert.ok(renderReport(r).includes("default-src 'none'"));
 });
+
+test('impossible calendar dates never produce elapsed time', () => {
+  for (const date of ['2026-02-30', '2025-02-29', '2026-04-31']) {
+    const events = [...start, terminal].map((e, i) => ({
+      ...e,
+      timestamp: `${date}T00:00:0${i}Z`,
+    }));
+    assert.equal(parseExport(jsonl(events)).elapsedMs, null);
+  }
+  const leap = [...start, terminal].map((e, i) => ({
+    ...e,
+    timestamp: `2024-02-29T00:00:0${i}+02:00`,
+  }));
+  assert.equal(parseExport(jsonl(leap)).elapsedMs, 2000);
+});
+
+test('unfinished tool items are surfaced without pretending the turn failed', () => {
+  const item = {
+    id: 'tool',
+    type: 'command_execution',
+    command: 'private text',
+    status: 'in_progress',
+  };
+  const r = run({ type: 'item.started', item }, terminal);
+  assert.equal(r.execution, 'completed');
+  assert.equal(r.activity.commands, 0);
+  assert.ok(
+    r.findings.some((f) => f.code === 'unfinished-items' && f.count === 1),
+  );
+  const completed = run(
+    { type: 'item.started', item },
+    {
+      type: 'item.completed',
+      item: { ...item, status: 'completed', exit_code: 0 },
+    },
+    terminal,
+  );
+  assert.ok(!completed.findings.some((f) => f.code === 'unfinished-items'));
+});
+
+test('item errors are reported without exposing messages or redefining turn status', () => {
+  const e = {
+    type: 'item.completed',
+    item: { id: 'err', type: 'error', message: 'PRIVATE_ERROR' },
+  };
+  const r = run(e, e, terminal);
+  assert.equal(r.execution, 'completed');
+  assert.ok(r.findings.some((f) => f.code === 'item-errors' && f.count === 1));
+  assert.ok(!JSON.stringify(r).includes('PRIVATE_ERROR'));
+});
+
+test('line limits include whitespace rather than only trimmed content', () => {
+  assert.throws(
+    () => parseExport(' '.repeat(1024 * 1024 + 1) + jsonl(start)),
+    /Line/,
+  );
+});
+
+test('HTML exposes known per-turn values when whole-run usage is unknown', () => {
+  const r = run(terminal, { type: 'turn.started' }, { type: 'turn.failed' });
+  assert.equal(r.usage.input, null);
+  const html = renderReport(r);
+  assert.match(html, /Per-turn measurements/);
+  assert.match(html, /<td>1<\/td><td>completed<\/td><td>100<\/td>/);
+  assert.match(html, /<td>2<\/td><td>failed<\/td><td>Unknown<\/td>/);
+  assert.match(html, /href="report.json"/);
+});

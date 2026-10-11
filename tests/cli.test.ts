@@ -118,3 +118,55 @@ test('CLI errors never expose malformed JSON content', async () => {
     await rm(dir, { recursive: true, force: true });
   }
 });
+
+test('analyze accepts an explicit synthetic label and scoped help', async () => {
+  const dir = await mkdtemp(path.join(os.tmpdir(), 'runlens-synthetic-'));
+  try {
+    const out = path.join(dir, 'report');
+    assert.equal(
+      invoke(
+        'analyze',
+        'examples/synthetic-run.jsonl',
+        '--synthetic',
+        '--out',
+        out,
+      ).status,
+      0,
+    );
+    assert.equal(
+      JSON.parse(await readFile(path.join(out, 'report.json'), 'utf8'))
+        .synthetic,
+      true,
+    );
+    assert.match(
+      await readFile(path.join(out, 'index.html'), 'utf8'),
+      /Synthetic demonstration/,
+    );
+    assert.equal(invoke('analyze', '--help').status, 0);
+    assert.equal(
+      invoke('compare', '--synthetic', '--out', path.join(dir, 'invalid'))
+        .status,
+      1,
+    );
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test('CLI distinguishes missing inputs and existing output safely', async () => {
+  const dir = await mkdtemp(path.join(os.tmpdir(), 'runlens-diagnostics-'));
+  try {
+    const missing = invoke(
+      'analyze',
+      path.join(dir, 'PRIVATE_NAME'),
+      '--out',
+      path.join(dir, 'new'),
+    );
+    assert.match(missing.stderr, /not found/);
+    assert.ok(!missing.stderr.includes('PRIVATE_NAME'));
+    const existing = invoke('demo', '--out', dir);
+    assert.match(existing.stderr, /already exists/);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});

@@ -34,6 +34,8 @@ node dist/src/cli.js analyze ./private-inputs/task.jsonl --out reports/task
 
 This writes `report.json` and `index.html` in a **new** directory. Your input remains unchanged. RunLens does not scan your history or execute commands from the export.
 
+For your own invented test exports, add `--synthetic` to keep the report visibly labeled. `runlens analyze --help` shows the command syntax. The built-in `demo` applies this label automatically.
+
 If you choose to capture a new Codex task, append `--json` to your normal `codex exec` invocation and redirect stdout to a JSONL file. Running Codex itself can change files and consume your allowance; RunLens does not launch it. Capture stderr separately so it does not corrupt the JSONL stream. [Supported format and upstream reference](docs/compatibility.md).
 
 ## What the report tells you
@@ -45,6 +47,7 @@ If you choose to capture a new Codex task, append `--json` to your normal `codex
 | Execution | Completed, failed or incomplete stream; always separate from task correctness |
 | Timeline | Bounded source-order events without raw commands, outputs or messages |
 | Coverage | Missing usage, unsupported events, excluded duplicates and unavailable measurements |
+| Per-turn measurements | Known turn values remain visible even when incomplete turns make aggregate usage unknown |
 | Provenance | Input SHA-256, byte count, adapter format and generator version |
 
 Most standard execution exports lack timestamps. **Elapsed time remains unknown** unless all source events carry ordered timestamps. Model identity, subscription usage, billing costs, linked subagents, test semantics and independent task verification are not established in this release.
@@ -79,7 +82,8 @@ Read the [security model](SECURITY.md) and [accounting contract](docs/accounting
 | Message or symptom | Action |
 |---|---|
 | Raw rollout unsupported | Supply `codex exec --json` output. Do not sum cumulative history counters manually. |
-| Could not create output | Choose a new directory and check parent permissions. Existing reports are never overwritten. |
+| Output directory already exists | Choose a new directory. Existing reports are never overwritten. |
+| Path not found / access denied | Check supplied paths and permissions; errors intentionally omit private path values. |
 | Invalid JSON object | Keep only JSONL stdout; a truncated final JSON object must be recovered at the source. Raw content is not echoed in errors. |
 | Unknown usage or time | Inspect coverage. Missing fields are not zero; standard exports may not contain timestamps. |
 | Multiple thread starts | Split independent exports. Concatenating sessions risks double-counting. |

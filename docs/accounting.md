@@ -10,6 +10,8 @@ Activity counts terminal item events. Command failures follow a failed status or
 
 Execution completed means the supported stream ended with terminal turns and no error event. It does not establish correctness, test passage, requirement satisfaction or deployment. Unknown event types reduce coverage and are never copied through verbatim.
 
-Elapsed time is the last minus first timestamp only when every nonblank event has a valid, ordered timestamp. It includes gaps between recorded events and is not CPU time or summed agent time. Standard exports can omit timestamps entirely.
+Elapsed time is the last minus first timestamp only when every nonblank event has a valid, ordered timestamp. Calendar dates, leap years, clock fields and explicit timezone offsets are checked; impossible dates are not normalized into valid ones. It includes gaps between recorded events and is not CPU time or summed agent time. Standard exports can omit timestamps entirely.
+
+Tool starts/updates without a terminal item produce an unfinished-activity finding even when the turn reports completion. Item-level errors produce a separate finding without changing the source's turn status. Neither finding includes raw messages. The HTML shows up to 200 per-turn measurements; all parsed turns remain in JSON.
 
 Comparisons display differences only when both categories are known. Input reports are validated for expected schema, fingerprints, execution status and essential counter consistency; they are not reverified against raw sources. Task/model equivalence, causation and outcome improvement remain unknown. Imported aggregates may be forged; never treat them as billing records.

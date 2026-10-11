@@ -45,6 +45,37 @@ function usage(value: unknown): Usage {
 function digest(value: string): string {
   return createHash('sha256').update(value).digest('hex');
 }
+function timestamp(value: unknown): number | null {
+  if (typeof value !== 'string') return null;
+  const parts =
+    /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d{1,9})?(Z|[+-]\d{2}:\d{2})$/.exec(
+      value,
+    );
+  if (!parts) return null;
+  const year = Number(parts[1]);
+  const month = Number(parts[2]);
+  const day = Number(parts[3]);
+  const leap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+  const days = [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  const zone = parts[7] ?? '';
+  if (
+    month < 1 ||
+    month > 12 ||
+    day < 1 ||
+    day > (days[month - 1] ?? 0) ||
+    Number(parts[4]) > 23 ||
+    Number(parts[5]) > 59 ||
+    Number(parts[6]) > 59
+  )
+    return null;
+  if (
+    zone !== 'Z' &&
+    (Number(zone.slice(1, 3)) > 23 || Number(zone.slice(4)) > 59)
+  )
+    return null;
+  const parsed = Date.parse(value);
+  return Number.isFinite(parsed) ? parsed : null;
+}
 function aggregate(turns: Turn[]): Usage {
   const result = emptyUsage();
   for (const key of Object.keys(result) as (keyof Usage)[]) {
@@ -102,18 +133,29 @@ export function parseExport(text: string, synthetic = false): Report {
   let unorderedTime = false;
   let sawError = false;
   const completedItems = new Map<string, string>();
+  const pendingItems = new Set<string>();
   const commands = new Set<string>();
-  const note = (code: string, message: string) => {
+  const note = (code: string, message: string, count = 1) => {
     const existing = r.findings.find((f) => f.code === code);
-    if (existing) existing.count++;
-    else r.findings.push({ code, message, count: 1 });
+    if (existing) existing.count += count;
+    else r.findings.push({ code, message, count });
+  };
+  const unfinished = () => {
+    if (pendingItems.size)
+      note(
+        'unfinished-items',
+        'Tool activity started or updated without a matching completion in this turn. Terminal activity counts may be incomplete.',
+        pendingItems.size,
+      );
+    pendingItems.clear();
   };
   const lines = text.replace(/^\uFEFF/, '').split('\n');
   for (let i = 0; i < lines.length; i++) {
-    const line = lines[i]?.trim() ?? '';
-    if (!line) continue;
-    if (Buffer.byteLength(line) > MAX_LINE)
+    const rawLine = lines[i] ?? '';
+    if (Buffer.byteLength(rawLine) > MAX_LINE)
       throw new Error(`Line ${i + 1} exceeds 1 MiB limit`);
+    const line = rawLine.trim();
+    if (!line) continue;
     if (++eventCount > MAX_EVENTS) throw new Error('Input exceeds event limit');
     let e: Record<string, unknown>;
     try {
@@ -134,18 +176,12 @@ export function parseExport(text: string, synthetic = false): Report {
       );
     if (typeof e.type !== 'string')
       throw new Error(`Missing event type at line ${i + 1}`);
-    if (typeof e.timestamp === 'string') {
-      const time = /^\d{4}-\d{2}-\d{2}T.*(?:Z|[+-]\d{2}:\d{2})$/.test(
-        e.timestamp,
-      )
-        ? Date.parse(e.timestamp)
-        : Number.NaN;
-      if (Number.isFinite(time)) {
-        if (lastTime !== null && time < lastTime) unorderedTime = true;
-        firstTime ??= time;
-        lastTime = time;
-        timedEvents++;
-      }
+    const time = timestamp(e.timestamp);
+    if (time !== null) {
+      if (lastTime !== null && time < lastTime) unorderedTime = true;
+      firstTime ??= time;
+      lastTime = time;
+      timedEvents++;
     }
     let kind = e.type;
     let status: string | null = null;
@@ -181,6 +217,7 @@ export function parseExport(text: string, synthetic = false): Report {
           throw new Error('Terminal turn event without an active turn');
         active.status = e.type === 'turn.completed' ? 'completed' : 'failed';
         active.usage = usage(e.usage);
+        unfinished();
         status = active.status;
         active = undefined;
         lastCompletion = fingerprint;
@@ -216,6 +253,19 @@ export function parseExport(text: string, synthetic = false): Report {
           ['in_progress', 'completed', 'failed'].includes(item.status)
             ? item.status
             : null;
+        const tool = [
+          'command_execution',
+          'mcp_tool_call',
+          'web_search',
+          'file_change',
+        ].includes(item.type);
+        if (tool && e.type !== 'item.completed') {
+          if (completedItems.has(item.id))
+            throw new Error(
+              'Tool activity follows its completion without a new turn',
+            );
+          pendingItems.add(item.id);
+        }
         if (e.type === 'item.completed') {
           const fingerprint = digest(JSON.stringify(item));
           const previous = completedItems.get(item.id);
@@ -226,6 +276,12 @@ export function parseExport(text: string, synthetic = false): Report {
             continue;
           }
           completedItems.set(item.id, fingerprint);
+          pendingItems.delete(item.id);
+          if (item.type === 'error')
+            note(
+              'item-errors',
+              'The source includes a completed error item. Its private message is omitted; inspect the original export to determine the impact.',
+            );
           if (item.type === 'command_execution') {
             r.activity.commands++;
             if (
@@ -273,6 +329,7 @@ export function parseExport(text: string, synthetic = false): Report {
     throw new Error(
       'No thread.started event; not a supported execution export',
     );
+  unfinished();
   r.coverage.turns = r.turns.length;
   r.coverage.turnsWithUsage = r.turns.filter(
     (t) => t.usage.input !== null && t.usage.output !== null,

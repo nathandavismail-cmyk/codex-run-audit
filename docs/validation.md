@@ -4,9 +4,10 @@ Date: 2026-10-11. Environment: macOS / Darwin arm64, Node 24.21.0, npm 11.19.0.
 
 ## Passed
 
-- `npm run check`: strict TypeScript, Biome, build and **21 tests**.
+- `npm run check`: strict TypeScript, Biome, build and **28 tests**.
 - Parser tests cover inclusive accounting, identical legitimate turns, duplicate terminals, missing/zero counters, overflow, incomplete streams, unsupported rollout input, event ordering, timestamps, bounded timelines and privacy.
 - CLI integration tests exercise demo, analyze, compare, errors and overwrite refusal.
+- Review added regressions for invalid calendar dates, missing tool completions, hidden item errors, whitespace-padded oversized lines, synthetic labeling, CLI diagnostics and partial per-turn HTML. Six new tests failed against the original implementation before the fixes.
 - Filesystem tests cover regular-file requirements, direct symlinks, FIFOs, invalid UTF-8, existing output symlinks and preservation of unrelated files.
 - Packaged CLI installed into a disposable directory with no runtime dependencies; demo, analyze, compare and help succeeded independently of the source checkout.
 - Archive inspection excludes source transcripts, reports, node_modules, tests and Git metadata.
