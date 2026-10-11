@@ -1,0 +1,22 @@
+{
+  "capturedAt": "2026-10-11T22:14:54.834Z",
+  "codexVersion": "codex-cli 0.162.0-alpha.17.2",
+  "platform": "darwin",
+  "arch": "arm64",
+  "node": "v24.21.0",
+  "synthetic": true,
+  "provider": "loopback mock; no model inference",
+  "requests": [
+    {
+      "method": "POST",
+      "path": "/v1/responses"
+    }
+  ],
+  "reportUsage": {
+    "input": 100,
+    "cachedInput": 60,
+    "uncachedInput": 40,
+    "output": 20,
+    "reasoningOutput": 5
+  }
+}

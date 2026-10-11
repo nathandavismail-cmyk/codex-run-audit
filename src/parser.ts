@@ -226,8 +226,16 @@ export function parseExport(text: string, synthetic = false): Report {
       case 'item.started':
       case 'item.updated':
       case 'item.completed': {
-        if (!active) throw new Error('Item event outside an active turn');
         const item = object(e.item);
+        // Native CLI can report model-metadata errors after thread creation,
+        // before the first turn. This exception does not admit orphan tools.
+        const startupDiagnostic =
+          started &&
+          r.turns.length === 0 &&
+          e.type === 'item.completed' &&
+          item.type === 'error';
+        if (!active && !startupDiagnostic)
+          throw new Error('Item event outside an active turn');
         if (typeof item.id !== 'string' || typeof item.type !== 'string')
           throw new Error('Item requires id and type');
         const knownTypes = [

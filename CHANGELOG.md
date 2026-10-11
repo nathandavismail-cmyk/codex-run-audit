@@ -13,5 +13,7 @@ Changes follow semantic versioning. Until 1.0, minor releases may revise adapter
 - Surface unfinished tool activity and item-level errors without leaking source messages.
 - Add explicit synthetic labeling, subcommand help, and actionable filesystem errors.
 - Show per-turn measurements in HTML when aggregate usage is unavailable.
+- Accept native startup error diagnostics without admitting tool activity outside turns.
+- Add an opt-in, isolated Codex CLI probe with a loopback mock provider and a captured synthetic regression fixture.
 
 No npm package, GitHub release, or real-model benchmark has been published.

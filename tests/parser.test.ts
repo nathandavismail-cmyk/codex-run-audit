@@ -22,6 +22,46 @@ const jsonl = (events: unknown[]) =>
   events.map((e) => JSON.stringify(e)).join('\n');
 const run = (...events: unknown[]) => parseExport(jsonl([...start, ...events]));
 
+test('native alpha CLI startup diagnostics preserve completion and synthetic counters', async () => {
+  const text = await readFile('tests/fixtures/native-mock-alpha.jsonl', 'utf8');
+  const report = parseExport(text, true);
+  assert.equal(report.execution, 'completed');
+  assert.deepEqual(report.usage, {
+    input: 100,
+    cachedInput: 60,
+    uncachedInput: 40,
+    output: 20,
+    reasoningOutput: 5,
+  });
+  assert.equal(report.synthetic, true);
+  assert.equal(report.elapsedMs, null);
+  assert.equal(report.findings.find((f) => f.code === 'item-errors')?.count, 1);
+  assert.ok(!JSON.stringify(report).includes('runlens-synthetic'));
+  assert.ok(!JSON.stringify(report).includes('RUNLENS_SYNTHETIC_OK'));
+});
+
+test('startup diagnostic exception rejects orphan tools and errors before a thread', () => {
+  const diagnostic = {
+    type: 'item.completed',
+    item: { id: 'x', type: 'error' },
+  };
+  assert.throws(() => parseExport(jsonl([diagnostic])), /outside an active/);
+  assert.throws(
+    () =>
+      parseExport(
+        jsonl([
+          start[0],
+          {
+            type: 'item.completed',
+            item: { id: 'x', type: 'command_execution' },
+          },
+        ]),
+      ),
+    /outside an active/,
+  );
+  assert.throws(() => run(terminal, diagnostic), /outside an active/);
+});
+
 test('inclusive accounting does not double count cached or reasoning tokens', () => {
   const r = run(terminal);
   assert.deepEqual(r.usage, {
