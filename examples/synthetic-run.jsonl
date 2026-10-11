@@ -1,0 +1,8 @@
+{"type":"thread.started","thread_id":"synthetic-demo","timestamp":"2026-01-01T12:00:00Z"}
+{"type":"turn.started","timestamp":"2026-01-01T12:00:01Z"}
+{"type":"item.started","item":{"id":"cmd1","type":"command_execution","command":"npm test","status":"in_progress"},"timestamp":"2026-01-01T12:00:02Z"}
+{"type":"item.completed","item":{"id":"cmd1","type":"command_execution","command":"npm test","exit_code":1,"status":"failed","aggregated_output":"Synthetic failing test"},"timestamp":"2026-01-01T12:00:05Z"}
+{"type":"item.completed","item":{"id":"edit1","type":"file_change","status":"completed","changes":[]},"timestamp":"2026-01-01T12:00:10Z"}
+{"type":"item.completed","item":{"id":"cmd2","type":"command_execution","command":"npm test","exit_code":0,"status":"completed","aggregated_output":"Synthetic passing test"},"timestamp":"2026-01-01T12:00:15Z"}
+{"type":"item.completed","item":{"id":"reply1","type":"agent_message","text":"Synthetic completion claim, not independent verification."},"timestamp":"2026-01-01T12:00:19Z"}
+{"type":"turn.completed","usage":{"input_tokens":12500,"cached_input_tokens":10000,"output_tokens":800,"reasoning_output_tokens":300},"timestamp":"2026-01-01T12:00:20Z"}

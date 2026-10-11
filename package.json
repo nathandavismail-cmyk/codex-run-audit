@@ -1,0 +1,38 @@
+{
+  "name": "runlens",
+  "version": "0.1.0",
+  "description": "Local, evidence-first reports for Codex execution exports",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
+  "bin": {
+    "runlens": "dist/src/cli.js"
+  },
+  "files": [
+    "dist/src",
+    "examples",
+    "docs",
+    "README.md",
+    "LICENSE",
+    "NOTICE.md",
+    "SECURITY.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "test": "npm run build && node --test --test-concurrency=1 dist/tests/*.test.js",
+    "check": "npm run typecheck && npm run lint && npm test",
+    "demo": "npm run build && node dist/src/cli.js demo --out reports/demo",
+    "prepack": "npm run check"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "@types/node": "24.19.2",
+    "@biomejs/biome": "2.5.15"
+  }
+}

@@ -1,0 +1,7 @@
+node_modules/
+dist/
+reports/
+*.tgz
+.DS_Store
+.env*
+private-inputs/
