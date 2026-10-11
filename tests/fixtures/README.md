@@ -23,3 +23,10 @@ temporary HOME/CODEX_HOME and read-only, ephemeral execution; it neither loads
 the user's credentials nor modifies their Codex configuration. Captures are
 local and never uploaded. The probe fails after a 30-second process timeout.
 It is opt-in and is not part of the ordinary unit test suite.
+
+`native-provider-failure.jsonl` is a second native capture from the same CLI
+version and date, generated with `--fail-provider` appended to that command.
+The mock returns HTTP 400 with an original synthetic error. Codex exits 1 and
+emits `error` and `turn.failed`; usage is absent. Only the thread ID is scrubbed.
+The adjacent metadata records the environment and single mock request. This
+checks native failed-turn handling without credentials or model inference.

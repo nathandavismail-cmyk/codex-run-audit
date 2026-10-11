@@ -8,8 +8,11 @@ import { join, resolve } from 'node:path';
 import { parseExport } from '../dist/src/parser.js';
 
 const output = process.argv[2];
-if (!output)
-  throw new Error('Usage: node scripts/capture-native.mjs <new-output-dir>');
+const failProvider = process.argv[3] === '--fail-provider';
+if (!output || (process.argv[3] && !failProvider) || process.argv.length > 4)
+  throw new Error(
+    'Usage: node scripts/capture-native.mjs <new-output-dir> [--fail-provider]',
+  );
 await mkdir(resolve(output), { recursive: false, mode: 0o700 });
 const root = await mkdtemp(join(tmpdir(), 'runlens-native-'));
 const home = join(root, 'home');
@@ -29,6 +32,22 @@ const server = createServer((req, res) => {
   req.resume();
   if (req.method !== 'POST' || req.url !== '/v1/responses') {
     res.writeHead(404).end();
+    return;
+  }
+  if (failProvider) {
+    res.writeHead(400, {
+      'content-type': 'application/json',
+      connection: 'close',
+    });
+    res.end(
+      JSON.stringify({
+        error: {
+          message: 'RUNLENS_SYNTHETIC_PROVIDER_FAILURE',
+          type: 'invalid_request_error',
+          code: 'runlens_test',
+        },
+      }),
+    );
     return;
   }
   const events = [
@@ -146,22 +165,28 @@ stream_max_retries = 0
   );
   assert.equal(
     result.code,
-    0,
-    'Codex execution failed; inspect local diagnostics',
+    failProvider ? 1 : 0,
+    'Unexpected Codex exit code; inspect local diagnostics',
   );
   assert.equal(requests.filter((r) => r.method === 'POST').length, 1);
   const report = parseExport(
     await readFile(join(output, 'export.jsonl'), 'utf8'),
     true,
   );
-  assert.equal(report.execution, 'completed');
-  assert.deepEqual(report.usage, {
-    input: 100,
-    cachedInput: 60,
-    uncachedInput: 40,
-    output: 20,
-    reasoningOutput: 5,
-  });
+  assert.equal(report.execution, failProvider ? 'failed' : 'completed');
+  if (failProvider) {
+    assert.ok(Object.values(report.usage).every((value) => value === null));
+    assert.equal(report.turns.length, 1);
+    assert.equal(report.turns[0].status, 'failed');
+  } else {
+    assert.deepEqual(report.usage, {
+      input: 100,
+      cachedInput: 60,
+      uncachedInput: 40,
+      output: 20,
+      reasoningOutput: 5,
+    });
+  }
   await writeFile(
     join(output, 'metadata.json'),
     `${JSON.stringify(
@@ -173,6 +198,7 @@ stream_max_retries = 0
         node: process.version,
         synthetic: true,
         provider: 'loopback mock; no model inference',
+        scenario: failProvider ? 'provider-failure' : 'success',
         requests,
         reportUsage: report.usage,
       },

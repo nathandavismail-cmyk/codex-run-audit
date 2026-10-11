@@ -16,5 +16,7 @@ Changes follow semantic versioning. Until 1.0, minor releases may revise adapter
 - Accept native startup error diagnostics without admitting tool activity outside turns.
 - Add an opt-in, isolated Codex CLI probe with a loopback mock provider and a captured synthetic regression fixture.
 - Document one authorized real-model export smoke test with source-matched usage counters; keep its transcript local and excluded from distribution.
+- Add native mock-provider failure coverage with unknown usage and private errors omitted.
+- Explain missing tool telemetry in reports after live tool probes encountered sandbox restrictions without command events.
 
 No npm package, GitHub release, or real-model benchmark has been published.

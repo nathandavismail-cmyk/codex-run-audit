@@ -1,0 +1,5 @@
+{"type":"thread.started","thread_id":"synthetic-thread"}
+{"type":"item.completed","item":{"id":"item_0","type":"error","message":"Model metadata for `runlens-synthetic` not found. Defaulting to fallback metadata; this can degrade performance and cause issues."}}
+{"type":"turn.started"}
+{"type":"error","message":"{\"error\":{\"message\":\"RUNLENS_SYNTHETIC_PROVIDER_FAILURE\",\"type\":\"invalid_request_error\",\"code\":\"runlens_test\"}}"}
+{"type":"turn.failed","error":{"message":"{\"error\":{\"message\":\"RUNLENS_SYNTHETIC_PROVIDER_FAILURE\",\"type\":\"invalid_request_error\",\"code\":\"runlens_test\"}}"}}

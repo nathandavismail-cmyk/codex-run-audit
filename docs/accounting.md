@@ -8,6 +8,12 @@ Exact repeated terminal turn events without a new turn are ignored. A new `turn.
 
 Activity counts terminal item events. Command failures follow a failed status or nonzero numeric exit code. Repetition means identical command text encountered again, not necessarily wasted effort. Commands are hashed in memory and omitted from outputs. File-change counts are event counts, not files changed. Tool-token attribution is unavailable.
 
+Zero recorded commands does not prove no command was attempted. Live validation
+on macOS encountered sandbox-blocked attempts described in agent messages but
+absent from command events. RunLens does not infer structured activity or task
+success from those free-text messages. A completed turn with zero tool items can
+therefore still represent an unsuccessful task.
+
 Execution completed means the supported stream ended with terminal turns and no error event. It does not establish correctness, test passage, requirement satisfaction or deployment. Unknown event types reduce coverage and are never copied through verbatim.
 
 Elapsed time is the last minus first timestamp only when every nonblank event has a valid, ordered timestamp. Calendar dates, leap years, clock fields and explicit timezone offsets are checked; impossible dates are not normalized into valid ones. It includes gaps between recorded events and is not CPU time or summed agent time. Standard exports can omit timestamps entirely.

@@ -71,5 +71,46 @@ Analyze the resulting export with `runlens analyze export.jsonl --out new-report
 Do not use `--synthetic` for a real-model capture. Numeric results may change
 with model selection, native instructions, cache state, and CLI version.
 
-Next coverage priorities: real tool activity and failure exports, Linux execution,
-and browser visual review. None is implied by this successful no-tool test.
+## Tool probes: blocked, not passed
+
+Two further authorized live runs used the same isolation and timeout at
+22:28 UTC on 2026-10-11. One requested exactly one execution of
+`/usr/bin/printf RUNLENS_TOOL_OK`; the other requested exactly one execution of
+`/bin/sh -c 'exit 7'`, with no retries. Both ended with CLI exit 0 and
+`turn.completed`, but neither produced the expected response or a command item.
+The agent messages reported a sandbox restriction: `sandbox_apply: Operation
+not permitted` in the first and sandbox exit 71 rather than expected 7 in the
+second. The requested command outcomes were therefore **not verified**.
+No sandbox bypass or additional live retries were performed.
+
+| Provider-reported measurement | Requested success | Requested exit 7 |
+| --- | ---: | ---: |
+| Input, inclusive | 23,646 | 23,690 |
+| Cached input, subset | 21,504 | 21,504 |
+| Uncached input, derived | 2,142 | 2,186 |
+| Output, inclusive | 58 | 76 |
+| Reasoning output, subset | 0 | 0 |
+| Recorded command items | 0 | 0 |
+| External process duration, ms | 6,724 | 6,497 |
+
+RunLens preserves the source's completed-turn status and leaves task correctness
+unverified. It does not parse the private agent messages into fabricated command
+events. Reports now explicitly explain that zero recorded tools does not prove
+no tool was attempted. Source-matching counter checks passed, but these runs
+do not establish successful live tool support or native failed-turn coverage.
+Scrubbed captures stay in ignored `private-inputs/tool-success.jsonl` and
+`private-inputs/tool-failure.jsonl`; reports are local only.
+
+## Native failed-turn probe: passed with a mock provider
+
+A separate loopback mock returned HTTP 400 with an original synthetic error.
+The same installed Codex CLI exited 1 and emitted `error` followed by
+`turn.failed`, with no usage. RunLens reported failed execution, kept all usage
+categories null, and omitted the raw error message. The capture and metadata
+are distributed as synthetic regression fixtures. This required no inference.
+Reproduce using the source checkout's `scripts/capture-native.mjs` with
+`--fail-provider` after the output directory.
+
+Next priorities: execute tool probes in an environment that permits the native
+read-only sandbox, then Linux execution and browser visual review. Native
+MCP/web/file-change events remain unverified.

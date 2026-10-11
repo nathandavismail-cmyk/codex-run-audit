@@ -34,3 +34,10 @@ also included `cache_write_input_tokens: 0`; RunLens currently omits that
 additional counter. It contained no timestamps or model identity, so those
 report fields remain null. This validates only the captured sequence and
 version, not real-model accounting, tools, or other Codex surfaces/releases.
+
+A second mock-provider probe on that version returned HTTP 400 and verified
+native `error` plus `turn.failed` serialization, exit 1, and unknown usage.
+Two real-model tool probes were sandbox-blocked and emitted no command items;
+their completed turns do not establish successful tool execution. Zero activity
+counts mean zero emitted terminal items, not proof that nothing was attempted.
+See [live validation](live-validation.md) for the complete observations.

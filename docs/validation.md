@@ -4,9 +4,11 @@ Date: 2026-10-11. Environment: macOS / Darwin arm64, Node 24.21.0, npm 11.19.0.
 
 ## Passed
 
-- `npm run check`: strict TypeScript, Biome, build and **30 tests**.
+- `npm run check`: strict TypeScript, Biome, build and **32 tests**.
 - Native CLI probe: `codex-cli 0.162.0-alpha.17.2` emitted JSON through one loopback mock-provider request. Expected synthetic counters survived native serialization and parsing. A pre-turn error-item incompatibility was found, fixed, and preserved as a regression fixture; orphan tools remain rejected. No real model was called.
 - Separately, one user-authorized real-model run completed through the existing ChatGPT login on the same CLI version. The fixed response was verified; RunLens matched the source usage exactly. See [live validation](live-validation.md) for observations and limits. This is a smoke test, not a benchmark.
+- Native provider-failure probe: an isolated mock HTTP 400 produced `error` and `turn.failed` with CLI exit 1. RunLens preserved failed execution, unknown usage, and error privacy. Added a captured synthetic fixture and regression test.
+- Two authorized live tool probes produced source-matching usage reports, but tool execution was blocked by the native macOS sandbox. These tool probes did not pass. Added a report explanation and regression test for missing tool telemetry without inferring task success.
 - Parser tests cover inclusive accounting, identical legitimate turns, duplicate terminals, missing/zero counters, overflow, incomplete streams, unsupported rollout input, event ordering, timestamps, bounded timelines and privacy.
 - CLI integration tests exercise demo, analyze, compare, errors and overwrite refusal.
 - Review added regressions for invalid calendar dates, missing tool completions, hidden item errors, whitespace-padded oversized lines, synthetic labeling, CLI diagnostics and partial per-turn HTML. Six new tests failed against the original implementation before the fixes.
@@ -18,7 +20,7 @@ Date: 2026-10-11. Environment: macOS / Darwin arm64, Node 24.21.0, npm 11.19.0.
 
 - A new clean development-dependency installation: offline npm lacked one cached development tarball. Existing local dependencies at the same pinned versions were reused for checks. The lockfile is included for ordinary `npm ci` setup.
 - Browser visual inspection: no attached browser was available and native Safari inspection failed. HTML content/escaping tests passed; visual review remains pending.
-- Real-model tool/failure coverage, private-history import, measured outcome improvement or subscription-cost reconciliation. The single successful live smoke test does not establish these.
+- Successful real-model tool execution, live provider-failure coverage, private-history import, measured outcome improvement or subscription-cost reconciliation. The successful no-tool run and mocked provider failure do not establish these; attempted live tools were sandbox-blocked.
 - Linux or Windows execution. Docker and Podman are unavailable on this host. Do not interpret macOS tests as cross-platform certification.
 - Online dependency vulnerability audit, package provenance, public GitHub configuration, publication or CI. No GitHub Actions workflow was created.
 

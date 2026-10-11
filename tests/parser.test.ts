@@ -22,6 +22,46 @@ const jsonl = (events: unknown[]) =>
   events.map((e) => JSON.stringify(e)).join('\n');
 const run = (...events: unknown[]) => parseExport(jsonl([...start, ...events]));
 
+test('native provider failure remains failed with unknown usage and private errors omitted', async () => {
+  const text = await readFile(
+    'tests/fixtures/native-provider-failure.jsonl',
+    'utf8',
+  );
+  const report = parseExport(text, true);
+  assert.equal(report.execution, 'failed');
+  assert.equal(report.turns[0]?.status, 'failed');
+  assert.equal(report.coverage.turnsWithUsage, 0);
+  assert.ok(Object.values(report.usage).every((value) => value === null));
+  assert.ok(report.findings.some((finding) => finding.code === 'stream-error'));
+  assert.ok(
+    !JSON.stringify(report).includes('RUNLENS_SYNTHETIC_PROVIDER_FAILURE'),
+  );
+  assert.ok(
+    !renderReport(report).includes('RUNLENS_SYNTHETIC_PROVIDER_FAILURE'),
+  );
+});
+
+test('missing tool telemetry stays distinct from verified task success', () => {
+  const report = run(
+    {
+      type: 'item.completed',
+      item: {
+        id: 'message',
+        type: 'agent_message',
+        text: 'PRIVATE_SYNTHETIC_TOOL_BLOCKED',
+      },
+    },
+    terminal,
+  );
+  assert.equal(report.execution, 'completed');
+  assert.equal(report.taskVerification, 'unverified');
+  assert.equal(report.activity.commands, 0);
+  assert.equal(report.activity.failedCommands, 0);
+  const html = renderReport(report);
+  assert.ok(html.includes('Zero does not prove no tool was attempted'));
+  assert.ok(!html.includes('PRIVATE_SYNTHETIC_TOOL_BLOCKED'));
+});
+
 test('native alpha CLI startup diagnostics preserve completion and synthetic counters', async () => {
   const text = await readFile('tests/fixtures/native-mock-alpha.jsonl', 'utf8');
   const report = parseExport(text, true);

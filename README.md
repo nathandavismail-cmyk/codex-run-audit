@@ -4,7 +4,7 @@
 
 RunLens turns an explicitly selected Codex execution export into a private, local report. Inspect recorded token usage, command failures, repeated commands and event order. Compare two exports without treating lower token use as proof of better work.
 
-**Status: 0.1.0 local preview.** Working CLI, standalone HTML/JSON reports, 30 tests, a native CLI probe using a synthetic local provider, and one successful real-model export smoke test. Not published to npm. No live-model benchmark or broad compatibility certification yet. The package name and project name have not been cleared for availability or trademarks.
+**Status: 0.1.0 local preview.** Working CLI, standalone HTML/JSON reports, 32 tests, native success/failure probes using a synthetic local provider, and one successful real-model export smoke test. Live tool probes were sandbox-blocked; tool compatibility remains unverified. Not published to npm. No live-model benchmark or broad compatibility certification yet. The package name and project name have not been cleared for availability or trademarks.
 
 ## Try the demo
 
