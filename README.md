@@ -120,7 +120,7 @@ The [developer pilot and comparison protocol](docs/developer-pilot.md) describes
 how to test whether reports improve diagnosis. No participant results or
 controlled efficiency improvements are claimed yet.
 
-Next: expand real-export coverage to tool activity and failed runs; run Linux checks; test accounting against a compatible existing analyzer; then add supported subagent linkage and independent acceptance evidence. Raw rollout parsing and automatic repair remain deferred.
+Next: expand real-export coverage to tool activity and failed runs; expand native Linux tool coverage; test accounting against a compatible existing analyzer; then add supported subagent linkage and independent acceptance evidence. Raw rollout parsing and automatic repair remain deferred.
 
 ## License
 

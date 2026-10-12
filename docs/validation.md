@@ -4,6 +4,11 @@ Date: 2026-10-11. Environment: macOS / Darwin arm64, Node 24.21.0, npm 11.19.0.
 
 ## Passed
 
+- Approved manual Ubuntu validation passed on commit `eb2cfb7`: [workflow evidence](https://github.com/nathandavismail-cmyk/codex-run-audit/actions/runs/38198752068). Clean installation, 34 tests, package installation/uninstallation and dependency audit passed.
+- Redesigned reports passed Chromium 156.0.8078.4 checks at 1280px and 390px for synthetic completed, failed and comparison reports. Navigation targets and JSON export resolve; metrics fit on one line; pages do not overflow horizontally; timeline expands; no page errors or external requests were observed. Desktop and mobile screenshots were reviewed. Tables scroll within their containers on narrow screens.
+- Ubuntu native Codex 0.162.1 mock-provider success and failure probes passed. Both native tool probes recorded host sandbox restrictions, **not verified tool execution**. The green workflow includes explicit environmental-block reporting and must not be interpreted as tool support certification.
+
+
 - `npm run check`: strict TypeScript, Biome, build and **34 tests**, including static follow-up guidance and privacy checks.
 - Fresh local Git clone in a path containing spaces: registry-backed `npm ci` with prepare/build, quality gate, and package smoke test passed without copying node_modules. The previous clean-install uncertainty is resolved.
 - Direct npm Git installation initially installed no executable. Adding the prepare/build lifecycle fixed it; a commit-pinned `git+file` install then passed help and demo. This validates npm's Git preparation, not remote GitHub authentication or transport.
@@ -22,9 +27,9 @@ Date: 2026-10-11. Environment: macOS / Darwin arm64, Node 24.21.0, npm 11.19.0.
 
 ## Not established
 
-- Browser visual inspection: no attached browser was available and native Safari inspection failed. HTML content/escaping tests passed; visual review remains pending.
+- Safari, Firefox, and Windows browser coverage. Chromium desktop/mobile viewport tests do not establish those environments.
 - Successful real-model tool execution, live provider-failure coverage, private-history import, measured outcome improvement or subscription-cost reconciliation. The successful no-tool run and mocked provider failure do not establish these; attempted live tools were sandbox-blocked.
-- Linux or Windows execution. Docker and Podman are unavailable on this host. Do not interpret macOS tests as cross-platform certification.
+- Windows execution. Ubuntu checks passed separately; this does not establish all Linux distributions.
 - Package provenance, public GitHub configuration, npm publication or a public release. The user approved a private repository and manual Ubuntu workflow; see launch documentation.
 
 ## Developer installation review

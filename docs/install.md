@@ -2,7 +2,7 @@
 
 Requires Node.js 24+ and npm. Check `node --version` before installing. Codex
 itself is only needed to capture new exports, not to run this analyzer.
-macOS arm64 is tested; Linux and Windows remain separate validation gates.
+macOS arm64 and Ubuntu with Node 24 are tested for installation and CLI behavior. Windows remains a separate validation gate.
 The GitHub repository is private; access is required. The package is not published to npm. Never install an unrelated
 package merely because its name matches a draft project name.
 

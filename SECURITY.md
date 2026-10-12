@@ -12,7 +12,7 @@ JSON reports are not signed. An attacker who can replace reports can replace the
 
 ## Supported versions
 
-Only the latest 0.1.x preview is maintained. macOS local tests are recorded in [validation](docs/validation.md); Linux and Windows compatibility are separate gates. Do not assume cross-platform protection from POSIX-specific checks.
+Only the latest 0.1.x preview is maintained. macOS and Ubuntu checks are recorded in [validation](docs/validation.md); Windows compatibility remains a separate gate. Do not assume cross-platform protection from POSIX-specific checks.
 
 ## Reporting
 

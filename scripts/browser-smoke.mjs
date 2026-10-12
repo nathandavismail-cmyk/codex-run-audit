@@ -84,8 +84,12 @@ try {
         );
         await page.locator('summary').click();
         assert.equal(await page.locator('details').getAttribute('open'), '');
+        await page.locator('summary').click();
         assert.equal(await page.locator('a[href="report.json"]').count(), 1);
       }
+      await page.evaluate(() =>
+        window.scrollTo({ top: 0, behavior: 'instant' }),
+      );
       await page.screenshot({
         path: path.join(output, `${name}-${width}.png`),
         fullPage: true,

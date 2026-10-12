@@ -9,7 +9,7 @@
 ## Release gates
 
 1. Completed: one authorized real no-tool export and native mocked success/failure, with exact CLI version. Pending: successful native tool execution outside the nested sandbox.
-2. Pending: Linux checks and visual report inspection; Windows remains separately planned.
+2. Completed: Ubuntu installation, package and Chromium report checks plus desktop/mobile screenshot review. Windows and other browser engines remain separately planned.
 3. Completed: rename to Codex Run Audit and point-in-time registry lookup. Completed: approved private GitHub repository. Pending: a verified private security channel before public release.
 4. Completed on macOS: fresh source installation, direct Git preparation, archive inspection and installed-package/uninstall checks.
 5. Completed: approved private repository and manual Ubuntu validation workflow. npm and public launch remain separate approval gates.

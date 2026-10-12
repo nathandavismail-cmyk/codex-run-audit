@@ -4,6 +4,8 @@ Changes follow semantic versioning. Until 1.0, minor releases may revise adapter
 
 ## 0.1.0 — Unreleased
 
+- Redesign HTML reports with responsive navigation, input-cache allocation charts, structured diagnostic actions, status badges, and a direct JSON export. Reports remain self-contained and script-free.
+
 - Rename the project and executable to Codex Run Audit (`codex-run-audit`); retain existing report schema identifiers.
 - Build Git installations through npm's prepare lifecycle so the executable exists after installation.
 - Add an isolated offline package install/uninstall regression check and installation guide.
