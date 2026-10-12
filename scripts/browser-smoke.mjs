@@ -96,19 +96,22 @@ try {
         await page.evaluate(() =>
           window.scrollTo({ top: 0, behavior: 'instant' }),
         );
-        await page.screenshot({
-          path: path.join(output, `${engine.name()}-${name}-${width}.png`),
-          fullPage: true,
-        });
-        if (process.argv.includes('--emit-screenshots')) {
-          const file = `${engine.name()}-${name}-${width}.png`;
-          const base64 = (await readFile(path.join(output, file))).toString(
-            'base64',
-          );
-          for (let offset = 0; offset < base64.length; offset += 1000)
-            console.log(
-              `CRA_IMAGE ${file} ${offset / 1000} ${base64.slice(offset, offset + 1000)}`,
+        const screenshots = [
+          { file: `${engine.name()}-${name}-${width}.png`, fullPage: true },
+        ];
+        if (engine.name() === 'chromium' && name === 'demo' && width === 1280)
+          screenshots.push({ file: 'report-overview.png', fullPage: false });
+        for (const { file, fullPage } of screenshots) {
+          await page.screenshot({ path: path.join(output, file), fullPage });
+          if (process.argv.includes('--emit-screenshots')) {
+            const base64 = (await readFile(path.join(output, file))).toString(
+              'base64',
             );
+            for (let offset = 0; offset < base64.length; offset += 1000)
+              console.log(
+                `CRA_IMAGE ${file} ${offset / 1000} ${base64.slice(offset, offset + 1000)}`,
+              );
+          }
         }
         checked.push({ name, width });
       }
