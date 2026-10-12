@@ -2,7 +2,7 @@
 
 ## Scope
 
-RunLens processes explicitly selected local files. It does not run agent tasks, shell commands from input, network requests, or automatic repairs. Raw transcript content is not included in generated reports. Reports contain metadata, counts and source hashes; these can still be sensitive.
+Codex Run Audit processes explicitly selected local files. It does not run agent tasks, shell commands from input, network requests, or automatic repairs. Raw transcript content is not included in generated reports. Reports contain metadata, counts and source hashes; these can still be sensitive.
 
 Input and output are untrusted. The parser bounds file size, line size, event count and displayed timeline length. It rejects raw rollout formats, malformed counters and unsupported lifecycle ordering. HTML escapes dynamic text and uses a restrictive Content Security Policy, no scripts, no remote assets and no form submissions.
 

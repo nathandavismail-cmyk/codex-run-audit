@@ -21,6 +21,7 @@ export interface Finding {
   code: string;
   message: string;
   count: number;
+  nextStep: string;
 }
 export interface Report {
   schema: 'runlens.report/v1';

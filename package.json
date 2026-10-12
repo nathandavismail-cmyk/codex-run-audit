@@ -1,5 +1,5 @@
 {
-  "name": "runlens",
+  "name": "codex-run-audit",
   "version": "0.1.0",
   "description": "Local, evidence-first reports for Codex execution exports",
   "type": "module",
@@ -8,7 +8,7 @@
     "node": ">=24"
   },
   "bin": {
-    "runlens": "dist/src/cli.js"
+    "codex-run-audit": "dist/src/cli.js"
   },
   "files": [
     "dist/src",
@@ -30,7 +30,9 @@
     "test": "npm run build && node --test --test-concurrency=1 dist/tests/*.test.js",
     "check": "npm run typecheck && npm run lint && npm test",
     "demo": "npm run build && node dist/src/cli.js demo --out reports/demo",
-    "prepack": "npm run check"
+    "prepack": "npm run check",
+    "prepare": "npm run build",
+    "test:package": "npm run build && node scripts/package-smoke.mjs"
   },
   "devDependencies": {
     "typescript": "7.0.2",

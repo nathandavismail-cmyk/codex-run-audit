@@ -30,7 +30,7 @@ source checkout; `scripts/capture-native.mjs` is an opt-in local probe.
 Observed: a pre-turn error item, a completed agent message, and turn usage
 mapping of 100 input / 60 cached / 20 output / 5 reasoning tokens. These are
 **synthetic provider counters**, not measured consumption. The native export
-also included `cache_write_input_tokens: 0`; RunLens currently omits that
+also included `cache_write_input_tokens: 0`; Codex Run Audit currently omits that
 additional counter. It contained no timestamps or model identity, so those
 report fields remain null. This validates only the captured sequence and
 version, not real-model accounting, tools, or other Codex surfaces/releases.

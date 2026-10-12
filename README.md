@@ -1,10 +1,10 @@
-# RunLens
+# Codex Run Audit
 
 **Understand what your coding agent did—and what the evidence actually supports.**
 
-RunLens turns an explicitly selected Codex execution export into a private, local report. Inspect recorded token usage, command failures, repeated commands and event order. Compare two exports without treating lower token use as proof of better work.
+Codex Run Audit turns an explicitly selected Codex execution export into a private, local report. Inspect recorded token usage, command failures, repeated commands and event order. Compare two exports without treating lower token use as proof of better work.
 
-**Status: 0.1.0 local preview.** Working CLI, standalone HTML/JSON reports, 32 tests, native success/failure probes using a synthetic local provider, and one successful real-model export smoke test. Live tool probes were sandbox-blocked; tool compatibility remains unverified. Not published to npm. No live-model benchmark or broad compatibility certification yet. The package name and project name have not been cleared for availability or trademarks.
+**Status: 0.1.0 local preview.** Working CLI, standalone HTML/JSON reports, 34 tests, an isolated package-install/uninstall check, native success/failure probes using a synthetic local provider, and one successful real-model export smoke test. Live tool probes were sandbox-blocked; tool compatibility remains unverified. Not published to npm or GitHub. No live-model benchmark or broad compatibility certification yet. The name is not trademark-cleared.
 
 ## Try the demo
 
@@ -24,6 +24,11 @@ node dist/src/cli.js demo --out reports/demo-2
 
 No API key, network service, model call, browser extension, or runtime dependency is needed to analyze files. Installing development dependencies may require internet access.
 
+For packaged installation, direct Git installation, upgrades, removal and setup
+troubleshooting, see the [installation guide](docs/install.md). The executable
+is `codex-run-audit`; the earlier local working name was RunLens. Existing JSON
+schema identifiers are retained for compatibility with those reports.
+
 ## Analyze a run
 
 Supply JSONL emitted by `codex exec --json`, not a raw session-history rollout:
@@ -32,11 +37,11 @@ Supply JSONL emitted by `codex exec --json`, not a raw session-history rollout:
 node dist/src/cli.js analyze ./private-inputs/task.jsonl --out reports/task
 ```
 
-This writes `report.json` and `index.html` in a **new** directory. Your input remains unchanged. RunLens does not scan your history or execute commands from the export.
+This writes `report.json` and `index.html` in a **new** directory. Your input remains unchanged. Codex Run Audit does not scan your history or execute commands from the export.
 
-For your own invented test exports, add `--synthetic` to keep the report visibly labeled. `runlens analyze --help` shows the command syntax. The built-in `demo` applies this label automatically.
+For your own invented test exports, add `--synthetic` to keep the report visibly labeled. `codex-run-audit analyze --help` shows the command syntax. The built-in `demo` applies this label automatically.
 
-If you choose to capture a new Codex task, append `--json` to your normal `codex exec` invocation and redirect stdout to a JSONL file. Running Codex itself can change files and consume your allowance; RunLens does not launch it. Capture stderr separately so it does not corrupt the JSONL stream. [Supported format and upstream reference](docs/compatibility.md).
+If you choose to capture a new Codex task, append `--json` to your normal `codex exec` invocation and redirect stdout to a JSONL file. Running Codex itself can change files and consume your allowance; Codex Run Audit does not launch it. Capture stderr separately so it does not corrupt the JSONL stream. [Supported format and upstream reference](docs/compatibility.md).
 
 ## What the report tells you
 
@@ -48,6 +53,7 @@ If you choose to capture a new Codex task, append `--json` to your normal `codex
 | Timeline | Bounded source-order events without raw commands, outputs or messages |
 | Coverage | Missing usage, unsupported events, excluded duplicates and unavailable measurements |
 | Per-turn measurements | Known turn values remain visible even when incomplete turns make aggregate usage unknown |
+| Next steps | Static, evidence-specific follow-up advice for each finding; no automatic execution or invented diagnosis |
 | Provenance | Input SHA-256, byte count, adapter format and generator version |
 
 Most standard execution exports lack timestamps. **Elapsed time remains unknown** unless all source events carry ordered timestamps. Model identity, subscription usage, billing costs, linked subagents, test semantics and independent task verification are not established in this release.
@@ -60,11 +66,11 @@ node dist/src/cli.js compare reports/baseline/report.json reports/candidate/repo
 
 The comparison shows candidate-minus-baseline differences and execution states. It does not certify equal tasks, infer skill effects, recommend a cheaper model or declare a winner. Unknown categories remain unknown.
 
-## Why RunLens?
+## Why Codex Run Audit?
 
-RunLens focuses on readable evidence and conservative interpretation in a small offline tool. It has zero runtime dependencies and generates reports with no JavaScript or external assets. Repeated activity is a diagnostic lead, not an accusation of waste. A successful shell command is not automatically a passing acceptance test.
+Codex Run Audit focuses on readable evidence and conservative interpretation in a small offline tool. It has zero runtime dependencies and generates reports with no JavaScript or external assets. Repeated activity is a diagnostic lead, not an accusation of waste. A successful shell command is not automatically a passing acceptance test.
 
-Existing tools already provide substantial functionality: [ccusage](https://github.com/ccusage/ccusage) covers usage analytics, and [Codex Engineering Workflow Pack](https://github.com/SetraTheXX/Codex-Engineering-Workflow-Pack) documents richer workflow evidence. RunLens does not claim to invent these capabilities. The longer-term hypothesis is incident-driven diagnosis across Codex versions; [our research and differentiation gate](docs/research.md) explain what remains to prove.
+Existing tools already provide substantial functionality: [ccusage](https://github.com/ccusage/ccusage) covers usage analytics, and [Codex Engineering Workflow Pack](https://github.com/SetraTheXX/Codex-Engineering-Workflow-Pack) documents richer workflow evidence. Codex Run Audit does not claim to invent these capabilities. The longer-term hypothesis is incident-driven diagnosis across Codex versions; [our research and differentiation gate](docs/research.md) explain what remains to prove.
 
 ## Privacy and safety
 
@@ -97,13 +103,18 @@ npm run typecheck
 npm run lint
 npm test
 npm run check
+npm run test:package
 npm pack
 ```
 
 Tests run serially with original synthetic inputs and disposable directories. `npm pack` runs the quality gate before producing a local archive; it does not publish. See [CONTRIBUTING](CONTRIBUTING.md), [architecture](docs/architecture.md), [release preparation](docs/releasing.md), and [roadmap](docs/roadmap.md).
 
+The [developer pilot and comparison protocol](docs/developer-pilot.md) describes
+how to test whether reports improve diagnosis. No participant results or
+controlled efficiency improvements are claimed yet.
+
 Next: expand real-export coverage to tool activity and failed runs; run Linux checks; test accounting against a compatible existing analyzer; then add supported subagent linkage and independent acceptance evidence. Raw rollout parsing and automatic repair remain deferred.
 
 ## License
 
-MIT. See [LICENSE](LICENSE) and [NOTICE](NOTICE.md). RunLens is an independent project and is not affiliated with or endorsed by OpenAI.
+MIT. See [LICENSE](LICENSE) and [NOTICE](NOTICE.md). Codex Run Audit is an independent project and is not affiliated with or endorsed by OpenAI.

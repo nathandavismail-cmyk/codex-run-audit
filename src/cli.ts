@@ -7,13 +7,13 @@ import { VERSION } from './model.js';
 import { parseExport } from './parser.js';
 import { renderComparison, renderReport } from './render.js';
 
-const help = `RunLens ${VERSION} — local reports for Codex execution exports
+const help = `Codex Run Audit ${VERSION} — local reports for Codex execution exports
 
-  runlens analyze <export.jsonl> --out <new-directory> [--synthetic]
-  runlens compare <baseline.json> <candidate.json> --out <new-directory>
-  runlens demo --out <new-directory>
-  runlens --help
-  runlens --version
+  codex-run-audit analyze <export.jsonl> --out <new-directory> [--synthetic]
+  codex-run-audit compare <baseline.json> <candidate.json> --out <new-directory>
+  codex-run-audit demo --out <new-directory>
+  codex-run-audit --help
+  codex-run-audit --version
 
 No model calls, telemetry, or automatic session scanning.
 Existing output directories are never overwritten. Raw rollout files are unsupported.
@@ -30,7 +30,7 @@ async function main(args: string[]): Promise<void> {
   }
   const command = args.shift();
   if (!['analyze', 'compare', 'demo'].includes(command ?? ''))
-    throw new Error('Unknown command; run runlens --help');
+    throw new Error('Unknown command; run codex-run-audit --help');
   if (args.length === 1 && args[0] === '--help') {
     console.log(help);
     return;
@@ -47,12 +47,12 @@ async function main(args: string[]): Promise<void> {
     } else if (arg === '--synthetic' && command === 'analyze' && !synthetic)
       synthetic = true;
     else if (arg?.startsWith('-'))
-      throw new Error('Unknown option; run runlens --help');
+      throw new Error('Unknown option; run codex-run-audit --help');
     else if (arg) positionals.push(arg);
   }
   const expected = command === 'compare' ? 2 : command === 'analyze' ? 1 : 0;
   if (positionals.length !== expected || !out)
-    throw new Error('Invalid arguments; run runlens --help');
+    throw new Error('Invalid arguments; run codex-run-audit --help');
   if (command === 'compare') {
     const a = JSON.parse(await readInput(positionals[0] ?? '')) as unknown;
     const b = JSON.parse(await readInput(positionals[1] ?? '')) as unknown;
@@ -101,7 +101,7 @@ main(process.argv.slice(2)).catch((error: unknown) => {
     ERR_ENCODING_INVALID_ENCODED_DATA: 'Input must be valid UTF-8.',
   };
   console.error(
-    `RunLens: ${messages[code] ?? (error instanceof SyntaxError ? 'Invalid JSON report; no source content is echoed.' : known ? error.message : 'Could not read input or create output. Check access and file format.')}`,
+    `Codex Run Audit: ${messages[code] ?? (error instanceof SyntaxError ? 'Invalid JSON report; no source content is echoed.' : known ? error.message : 'Could not read input or create output. Check access and file format.')}`,
   );
   process.exitCode = 1;
 });

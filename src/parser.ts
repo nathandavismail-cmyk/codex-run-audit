@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import { nextStep } from './guidance.js';
 import {
   emptyUsage,
   type Report,
@@ -138,7 +139,7 @@ export function parseExport(text: string, synthetic = false): Report {
   const note = (code: string, message: string, count = 1) => {
     const existing = r.findings.find((f) => f.code === code);
     if (existing) existing.count += count;
-    else r.findings.push({ code, message, count });
+    else r.findings.push({ code, message, count, nextStep: nextStep(code) });
   };
   const unfinished = () => {
     if (pendingItems.size)

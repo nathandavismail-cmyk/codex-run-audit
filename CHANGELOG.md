@@ -4,6 +4,11 @@ Changes follow semantic versioning. Until 1.0, minor releases may revise adapter
 
 ## 0.1.0 — Unreleased
 
+- Rename the project and executable to Codex Run Audit (`codex-run-audit`); retain existing report schema identifiers.
+- Build Git installations through npm's prepare lifecycle so the executable exists after installation.
+- Add an isolated offline package install/uninstall regression check and installation guide.
+- Add static next-step guidance to findings and a developer pilot/comparison protocol.
+
 - Analyze explicit Codex execution JSONL exports into local HTML and JSON.
 - Preserve unknown usage and reject inconsistent accounting or raw rollout input.
 - Compare recorded usage without inferring task equivalence or causal improvement.

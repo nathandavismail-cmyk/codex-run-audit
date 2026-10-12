@@ -37,13 +37,13 @@ the derived subtraction, execution status, and omission of the marker and
 thread ID from report content. A second import of the scrubbed export preserved
 all usage and activity measurements. No parser changes were necessary.
 
-These are provider-reported counters. Matching an export verifies RunLens's
+These are provider-reported counters. Matching an export verifies Codex Run Audit's
 import, not the provider's underlying token meter. Input includes context beyond
 the short user prompt; this test does not attribute that context or establish
 that it was unnecessary. Cached input is already included in input and must not
 be added again.
 
-The export omitted timestamps and model identity. RunLens correctly retains
+The export omitted timestamps and model identity. Codex Run Audit correctly retains
 null elapsed time, model and cost. The external process duration above is
 separate from export-derived elapsed time. Subscription allowance consumed,
 dollar cost and exact model version were not established.
@@ -67,7 +67,7 @@ codex exec --json --ephemeral --ignore-user-config --ignore-rules \
   > export.jsonl 2> diagnostics.txt
 ```
 
-Analyze the resulting export with `runlens analyze export.jsonl --out new-report`.
+Analyze the resulting export with `codex-run-audit analyze export.jsonl --out new-report`.
 Do not use `--synthetic` for a real-model capture. Numeric results may change
 with model selection, native instructions, cache state, and CLI version.
 
@@ -93,7 +93,7 @@ No sandbox bypass or additional live retries were performed.
 | Recorded command items | 0 | 0 |
 | External process duration, ms | 6,724 | 6,497 |
 
-RunLens preserves the source's completed-turn status and leaves task correctness
+Codex Run Audit preserves the source's completed-turn status and leaves task correctness
 unverified. It does not parse the private agent messages into fabricated command
 events. Reports now explicitly explain that zero recorded tools does not prove
 no tool was attempted. Source-matching counter checks passed, but these runs
@@ -105,7 +105,7 @@ Scrubbed captures stay in ignored `private-inputs/tool-success.jsonl` and
 
 A separate loopback mock returned HTTP 400 with an original synthetic error.
 The same installed Codex CLI exited 1 and emitted `error` followed by
-`turn.failed`, with no usage. RunLens reported failed execution, kept all usage
+`turn.failed`, with no usage. Codex Run Audit reported failed execution, kept all usage
 categories null, and omitted the raw error message. The capture and metadata
 are distributed as synthetic regression fixtures. This required no inference.
 Reproduce using the source checkout's `scripts/capture-native.mjs` with

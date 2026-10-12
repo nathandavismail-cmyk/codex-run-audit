@@ -6,8 +6,8 @@ Date: 2026-10-11. Environment: macOS / Darwin arm64, Node 24.21.0, npm 11.19.0.
 
 - `npm run check`: strict TypeScript, Biome, build and **32 tests**.
 - Native CLI probe: `codex-cli 0.162.0-alpha.17.2` emitted JSON through one loopback mock-provider request. Expected synthetic counters survived native serialization and parsing. A pre-turn error-item incompatibility was found, fixed, and preserved as a regression fixture; orphan tools remain rejected. No real model was called.
-- Separately, one user-authorized real-model run completed through the existing ChatGPT login on the same CLI version. The fixed response was verified; RunLens matched the source usage exactly. See [live validation](live-validation.md) for observations and limits. This is a smoke test, not a benchmark.
-- Native provider-failure probe: an isolated mock HTTP 400 produced `error` and `turn.failed` with CLI exit 1. RunLens preserved failed execution, unknown usage, and error privacy. Added a captured synthetic fixture and regression test.
+- Separately, one user-authorized real-model run completed through the existing ChatGPT login on the same CLI version. The fixed response was verified; Codex Run Audit matched the source usage exactly. See [live validation](live-validation.md) for observations and limits. This is a smoke test, not a benchmark.
+- Native provider-failure probe: an isolated mock HTTP 400 produced `error` and `turn.failed` with CLI exit 1. Codex Run Audit preserved failed execution, unknown usage, and error privacy. Added a captured synthetic fixture and regression test.
 - Two authorized live tool probes produced source-matching usage reports, but tool execution was blocked by the native macOS sandbox. These tool probes did not pass. Added a report explanation and regression test for missing tool telemetry without inferring task success.
 - Parser tests cover inclusive accounting, identical legitimate turns, duplicate terminals, missing/zero counters, overflow, incomplete streams, unsupported rollout input, event ordering, timestamps, bounded timelines and privacy.
 - CLI integration tests exercise demo, analyze, compare, errors and overwrite refusal.

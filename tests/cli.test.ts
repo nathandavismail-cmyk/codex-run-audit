@@ -28,7 +28,7 @@ test('help, version and invalid arguments have predictable exit codes', () => {
     assert.equal(invoke(...args).status, 1);
 });
 test('demo, analyze and compare work end to end without modifying inputs', async () => {
-  const dir = await mkdtemp(path.join(os.tmpdir(), 'runlens-cli-'));
+  const dir = await mkdtemp(path.join(os.tmpdir(), 'codex-run-audit-cli-'));
   try {
     const a = path.join(dir, 'first');
     const b = path.join(dir, 'second');
@@ -70,7 +70,7 @@ test('demo, analyze and compare work end to end without modifying inputs', async
   }
 });
 test('filesystem input rejects symlinks, directories, invalid UTF-8 and FIFOs', async () => {
-  const dir = await mkdtemp(path.join(os.tmpdir(), 'runlens-io-'));
+  const dir = await mkdtemp(path.join(os.tmpdir(), 'codex-run-audit-io-'));
   try {
     const file = path.join(dir, 'input');
     await writeFile(file, 'hello');
@@ -90,7 +90,7 @@ test('filesystem input rejects symlinks, directories, invalid UTF-8 and FIFOs', 
   }
 });
 test('output refuses an existing symlink and preserves unrelated content', async () => {
-  const dir = await mkdtemp(path.join(os.tmpdir(), 'runlens-output-'));
+  const dir = await mkdtemp(path.join(os.tmpdir(), 'codex-run-audit-output-'));
   try {
     const original = path.join(dir, 'original');
     await mkdir(original);
@@ -107,7 +107,7 @@ test('output refuses an existing symlink and preserves unrelated content', async
   }
 });
 test('CLI errors never expose malformed JSON content', async () => {
-  const dir = await mkdtemp(path.join(os.tmpdir(), 'runlens-errors-'));
+  const dir = await mkdtemp(path.join(os.tmpdir(), 'codex-run-audit-errors-'));
   try {
     const source = path.join(dir, 'bad.json');
     await writeFile(source, '{PRIVATE_TOKEN');
@@ -120,7 +120,9 @@ test('CLI errors never expose malformed JSON content', async () => {
 });
 
 test('analyze accepts an explicit synthetic label and scoped help', async () => {
-  const dir = await mkdtemp(path.join(os.tmpdir(), 'runlens-synthetic-'));
+  const dir = await mkdtemp(
+    path.join(os.tmpdir(), 'codex-run-audit-synthetic-'),
+  );
   try {
     const out = path.join(dir, 'report');
     assert.equal(
@@ -154,7 +156,9 @@ test('analyze accepts an explicit synthetic label and scoped help', async () => 
 });
 
 test('CLI distinguishes missing inputs and existing output safely', async () => {
-  const dir = await mkdtemp(path.join(os.tmpdir(), 'runlens-diagnostics-'));
+  const dir = await mkdtemp(
+    path.join(os.tmpdir(), 'codex-run-audit-diagnostics-'),
+  );
   try {
     const missing = invoke(
       'analyze',

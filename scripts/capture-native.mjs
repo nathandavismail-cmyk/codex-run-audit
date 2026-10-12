@@ -14,7 +14,7 @@ if (!output || (process.argv[3] && !failProvider) || process.argv.length > 4)
     'Usage: node scripts/capture-native.mjs <new-output-dir> [--fail-provider]',
   );
 await mkdir(resolve(output), { recursive: false, mode: 0o700 });
-const root = await mkdtemp(join(tmpdir(), 'runlens-native-'));
+const root = await mkdtemp(join(tmpdir(), 'codex-run-audit-native-'));
 const home = join(root, 'home');
 await mkdir(home);
 const requests = [];
@@ -44,7 +44,7 @@ const server = createServer((req, res) => {
         error: {
           message: 'RUNLENS_SYNTHETIC_PROVIDER_FAILURE',
           type: 'invalid_request_error',
-          code: 'runlens_test',
+          code: 'codex-run-audit_test',
         },
       }),
     );
@@ -98,11 +98,11 @@ try {
   await writeFile(
     join(home, 'config.toml'),
     `
-model = "runlens-synthetic"
-model_provider = "runlens_mock"
+model = "codex-run-audit-synthetic"
+model_provider = "codex-run-audit_mock"
 web_search = "disabled"
-[model_providers.runlens_mock]
-name = "RunLens loopback mock"
+[model_providers.codex-run-audit_mock]
+name = "Codex Run Audit loopback mock"
 base_url = "http://127.0.0.1:${port}/v1"
 wire_api = "responses"
 requires_openai_auth = false

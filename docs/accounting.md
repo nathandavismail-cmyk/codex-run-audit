@@ -2,6 +2,10 @@
 
 `runlens.report/v1` records one execution export. `usage.input` includes `cachedInput`; `uncachedInput` is their difference only when both are known. `usage.output` includes the reported reasoning subset. Neither subset is added again. Every non-null counter is a nonnegative safe integer; contradictory subsets and overflow are errors.
 
+The `runlens.report/v1` and `runlens.comparison/v1` identifiers predate the
+Codex Run Audit rename and remain accepted. New finding records add a static
+`nextStep` string; it is guidance, not source evidence or an executable command.
+
 The adapter treats `turn.completed.usage` as per-turn usage. It sums a category only if that category is known for every started turn. Partial per-turn observations remain in `turns`; whole-run categories become null rather than silently undercounting. Null means unavailable; zero means observed zero.
 
 Exact repeated terminal turn events without a new turn are ignored. A new `turn.started` always denotes new work even when its usage equals the previous turn. Completed items are deduplicated by ID and payload within a turn; conflicting duplicate completions fail. Multiple thread starts are rejected. This is not a general deduplicator for replayed parent histories.
@@ -10,7 +14,7 @@ Activity counts terminal item events. Command failures follow a failed status or
 
 Zero recorded commands does not prove no command was attempted. Live validation
 on macOS encountered sandbox-blocked attempts described in agent messages but
-absent from command events. RunLens does not infer structured activity or task
+absent from command events. Codex Run Audit does not infer structured activity or task
 success from those free-text messages. A completed turn with zero tool items can
 therefore still represent an unsuccessful task.
 
