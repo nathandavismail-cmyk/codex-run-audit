@@ -9,7 +9,7 @@ Date: 2026-10-11. Environment: macOS / Darwin arm64, Node 24.21.0, npm 11.19.0.
 - Ubuntu native Codex 0.162.1 mock-provider success and failure probes passed. Both native tool probes recorded host sandbox restrictions, **not verified tool execution**. The green workflow includes explicit environmental-block reporting and must not be interpreted as tool support certification.
 
 
-- `npm run check`: strict TypeScript, Biome, build and **34 tests**, including static follow-up guidance and privacy checks.
+- `npm run check`: strict TypeScript, Biome, build and **37 tests** (36 pass and one Linux-only test skips on macOS), including static follow-up guidance and privacy checks.
 - Fresh local Git clone in a path containing spaces: registry-backed `npm ci` with prepare/build, quality gate, and package smoke test passed without copying node_modules. The previous clean-install uncertainty is resolved.
 - Direct npm Git installation initially installed no executable. Adding the prepare/build lifecycle fixed it; a commit-pinned `git+file` install then passed help and demo. This validates npm's Git preparation, not remote GitHub authentication or transport.
 - `npm run test:package` passed: offline isolated global-prefix installation, help/version, demo/analyze/compare, paths with spaces, unchanged inputs, overwrite refusal, removal of package/executable, preservation of reports, package-content exclusions and identical repeated archive hashes on this host/toolchain.
@@ -27,7 +27,7 @@ Date: 2026-10-11. Environment: macOS / Darwin arm64, Node 24.21.0, npm 11.19.0.
 
 ## Not established
 
-- Safari, Firefox, and Windows browser coverage. Chromium desktop/mobile viewport tests do not establish those environments.
+- Actual macOS Safari, Firefox, and Windows browser coverage. Linux WebKit does not establish Safari integration.
 - Successful real-model tool execution, live provider-failure coverage, private-history import, measured outcome improvement or subscription-cost reconciliation. The successful no-tool run and mocked provider failure do not establish these; attempted live tools were sandbox-blocked.
 - Windows execution. Ubuntu checks passed separately; this does not establish all Linux distributions.
 - Package provenance, public GitHub configuration, npm publication or a public release. The user approved a private repository and manual Ubuntu workflow; see launch documentation.
@@ -43,3 +43,24 @@ New local commits use the verified GitHub account's noreply identity; earlier
 development history is preserved. The user approved pushing the reviewed history to a private GitHub repository. A fresh remote clone passed clean install, demo and package checks.
 
 The demo and automated fixtures are synthetic. Their numeric values establish expected fixture behavior only. The separate real-model smoke test remains local; its raw capture is excluded from source and package archives. See [compatibility](compatibility.md) for coverage limits.
+
+
+## Report-opening and pilot readiness pass
+
+- `--open` uses separate process arguments and encoded file URLs. Tests cover
+  spaces, Unicode, shell metacharacters, unsupported hosts, and process failure.
+- The actual macOS opener attempt could not launch Safari in this environment.
+  The command retained HTML/JSON, printed the file URL and warning, and exited 0.
+  Successful application launch remains unverified here.
+- Five original checksum-pinned diagnosis fixtures passed accounting expectations
+  locally. Results explicitly say `fixture-conformance` and developer outcome
+  `not-measured`. This is not a benchmark or human trial.
+- Updated package installation and removal checks passed locally.
+
+- Final Ubuntu run on `e3a343f` passed all **37 tests**, packaging, five
+  diagnosis fixtures, dependency audit, and **12 browser scenarios** across
+  Chromium 156.0.8078.4 and WebKit 27.2 at 1280px/390px. No page errors or remote
+  requests were observed. WebKit exposed a mobile metric wrap; the fixed mobile
+  layout passed and its screenshot was inspected.
+  [Workflow evidence](https://github.com/nathandavismail-cmyk/codex-run-audit/actions/runs/38199890375).
+  The native tool probes still explicitly report sandbox-blocked execution.

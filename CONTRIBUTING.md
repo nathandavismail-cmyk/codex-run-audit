@@ -21,3 +21,19 @@ loopback mock provider. Human feedback and comparative evaluations follow
 [the pilot protocol](docs/developer-pilot.md).
 
 Contributions are licensed under the project's MIT license. Do not copy external skill content, fixtures, or code without license review and attribution. Read [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
+## Diagnosis fixtures and browser coverage
+
+`npm run eval:fixtures -- /path/to/new-results` verifies five original synthetic
+cases and emits HTML, JSON and a Markdown summary. The output path must not
+exist. Keep fixture hashes and expected observations reviewed together; never
+present conformance results as human or model benchmarks. Pilot materials are
+in `evals/diagnosis/` and the protocol is in `docs/developer-pilot.md`.
+
+The approved manual Ubuntu workflow runs Chromium and WebKit serially at desktop
+and mobile viewport sizes. To reproduce on a suitable test host, install the
+pinned Playwright browser binaries and run
+`npm run test:browser -- /path/to/new-browser-results --webkit` after building.
+Browser installation downloads substantial test-only dependencies; no browser
+binary or runtime dependency is shipped in the CLI package. WebKit testing on
+Linux does not establish Safari integration on macOS.

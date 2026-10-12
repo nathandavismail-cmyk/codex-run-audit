@@ -5,7 +5,8 @@ Changes follow semantic versioning. Until 1.0, minor releases may revise adapter
 ## 0.1.0 — Unreleased
 
 - Add opt-in `--open` for generated reports, encoded browser URLs and recoverable headless-launch failures.
-- Extend the approved manual Ubuntu browser checks to WebKit as well as Chromium.
+- Extend the approved manual Ubuntu browser checks to WebKit as well as Chromium; fix narrow-screen metric wrapping found by WebKit.
+- Add five checksum-pinned synthetic diagnosis cases, a conformance runner and separate participant/facilitator pilot materials.
 
 - Redesign HTML reports with responsive navigation, input-cache allocation charts, structured diagnostic actions, status badges, and a direct JSON export. Reports remain self-contained and script-free.
 

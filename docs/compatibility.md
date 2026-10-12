@@ -8,7 +8,7 @@ The sequence must start with a thread before any turn. Items require an active t
 
 Optional timestamp fields are accepted for explicitly timestamped exports; no claim is made that standard Codex supplies them. Missing cached/reasoning counters stay unknown. Model identity, subagent relationships, subscription limits and independent test results are not inferred.
 
-Unsupported: raw `~/.codex/sessions` rollouts, app-server protocol streams, multi-thread merged traces, automatic history scanning, cloud/desktop exports without a verified adapter, and billing reconciliation. Windows is not claimed supported. Ubuntu with Node 24 passed the CLI, parser, packaging and Chromium report checks in the manual validation workflow. Native Codex 0.162.1 mocked success and provider-failure probes passed; native tool execution was blocked by the runner sandbox and is not verified.
+Unsupported: raw `~/.codex/sessions` rollouts, app-server protocol streams, multi-thread merged traces, automatic history scanning, cloud/desktop exports without a verified adapter, and billing reconciliation. Windows is not claimed supported. Ubuntu with Node 24 passed the CLI, parser, packaging, Chromium and WebKit report checks in the manual validation workflow. Native Codex 0.162.1 mocked success and provider-failure probes passed; native tool execution was blocked by the runner sandbox and is not verified.
 
 Before declaring native compatibility, preserve a consented scrubbed real export with exact Codex version, source surface, independently expected measurements, and permission to distribute the fixture. Do not run a new model task or expose private history merely to satisfy this gate.
 
