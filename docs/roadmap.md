@@ -8,11 +8,13 @@
 
 ## Release gates
 
-1. Validate a scrubbed, authorized real Codex export and record exact format/version support.
-2. Run local checks on Linux; independently plan Windows portability tests.
-3. Check name/package availability and establish GitHub ownership and private security contact.
-4. Review package contents and run a clean installed-package smoke test.
-5. Publish only with owner approval. No Actions are part of this preview.
+1. Completed: one authorized real no-tool export and native mocked success/failure, with exact CLI version. Pending: successful native tool execution outside the nested sandbox.
+2. Pending: Linux checks and visual report inspection; Windows remains separately planned.
+3. Completed: rename to Codex Run Audit and point-in-time registry lookup. Pending: remote ownership approval and a verified private security channel before public release.
+4. Completed on macOS: fresh source installation, direct Git preparation, archive inspection and installed-package/uninstall checks.
+5. Pending: explicit approval to create/push the repository and separately create GitHub Actions. No workflow is currently shipped.
+
+See [launch preparation](launch.md) for the concrete proposed repository and checks.
 
 ## Next product experiments
 

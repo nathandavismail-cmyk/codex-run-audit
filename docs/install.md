@@ -48,6 +48,9 @@ Direct npm installation from a trusted Git URL also builds through `prepare`.
 It requires development dependencies and enabled lifecycle scripts. Pin a
 reviewed commit rather than a moving branch. A local Git transport was tested;
 remote GitHub transport remains untested until a repository is published.
+Some npm versions warn about unapproved lifecycle scripts. Review the source
+before enabling any script; the prebuilt archive is the script-free installation
+path. Do not globally approve arbitrary install scripts to silence a warning.
 
 ## Updates and removal
 
