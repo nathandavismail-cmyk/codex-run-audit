@@ -81,3 +81,19 @@ Chromium/WebKit/Firefox desktop/mobile scenarios. The browser checks also exerci
 keyboard Tab/Enter access to the skip link, with reduced motion. No page errors
 or external requests were recorded. This is targeted keyboard coverage, not a
 full accessibility certification. Native tools remained explicitly sandbox-blocked.
+
+
+## Prepared 1.0.0 release
+
+The [1.0.0 Ubuntu run](https://github.com/nathandavismail-cmyk/codex-run-audit/actions/runs/38203736732)
+on `db7a0b2` passed all 37 tests, 18 three-engine browser scenarios, five diagnosis
+fixtures, package installation/removal and dependency audit. The CLI/package/lock
+versions are checked together, and comparison accepts a compatible legacy 0.1.0
+report while producing a 1.0.0 generator version with unchanged v1 schema IDs.
+Local 1.0.0 package checks also passed. Native tool checks continue to report
+sandbox blocks and are not counted as successful command execution.
+
+A separate clean-source installation before the version bump passed without
+reusing node_modules. A targeted history scan checked 194 reachable blobs for
+specific credential patterns and sensitive paths, finding no matches; it is not
+an exhaustive security audit. Historical author metadata remains unchanged.

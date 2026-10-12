@@ -22,7 +22,8 @@
     "CONTRIBUTING.md",
     "CODE_OF_CONDUCT.md",
     "llms.txt",
-    "SUPPORT.md"
+    "SUPPORT.md",
+    "CITATION.cff"
   ],
   "scripts": {
     "build": "tsc",

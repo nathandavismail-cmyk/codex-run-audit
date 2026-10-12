@@ -38,3 +38,8 @@ Name searches and npm E404 are not legal clearance or package reservation.
 The project is independent of OpenAI. No invitations, public announcements, npm publication or GitHub releases have been made. Artifact storage was full during validation; synthetic screenshots can also be recovered from the bounded CI log output. Artifact-upload failure is reported separately and does not mask a failing test.
 
 README, package keywords, `llms.txt`, and structured project facts are prepared for accurate discovery. Public indexing remains blocked by private visibility; see [discoverability](discoverability.md). No recommendation ranking or search-traffic lift is claimed.
+
+For the first public release, version 1.0.0 is prepared with a documented stable
+CLI/schema contract, support guide, citation metadata and local release notes.
+Publication remains pending; unverified compatibility is recorded, not silently
+promoted to a supported claim.

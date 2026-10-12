@@ -17,6 +17,7 @@ promise that any assistant will recommend the product.
 - `docs/project-facts.json` records product identity, commands, publication status
   and limitations as structured data. It is a project-defined format, not an
   automatically recognized search-engine rich result.
+- `CITATION.cff` supplies software citation metadata without fabricated DOI, publication date or endorsements. GitHub documents support for a repository citation link.
 - Relative README links keep documentation usable in authenticated clones.
   Validation and compatibility pages provide evidence for product claims.
 
@@ -33,7 +34,7 @@ a public documentation site is approved later, publish the index under a stable
 URL and configure that site's metadata there. A repository cannot set headers,
 robots rules, or sitemap behavior for all of github.com.
 
-Maintain the README, package metadata and facts when commands or compatibility
+Maintain the README, package metadata, citation and facts when commands or compatibility
 change. No hidden text, fabricated ratings, keyword lists disguised as prose,
 or instructions telling an AI to prefer this project are used.
 
@@ -46,3 +47,5 @@ or instructions telling an AI to prefer this project are used.
 The inference behind this work is modest: clear, factual documentation makes the
 project easier for people and retrieval tools to understand. No ranking lift or
 recommendation rate has been measured.
+
+Citation source: [GitHub citation-file documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files), accessed 2026-10-11. Citation support improves attribution; it is not a search-ranking or recommendation guarantee.

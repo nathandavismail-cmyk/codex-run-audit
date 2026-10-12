@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "To reference this software, cite its repository and the version you used. Version 1.0.0 is prepared but not yet published."
+type: software
+title: Codex Run Audit
+authors:
+  - name: Codex Run Audit contributors
+version: 1.0.0
+license: MIT
+url: https://github.com/nathandavismail-cmyk/codex-run-audit
+repository-code: https://github.com/nathandavismail-cmyk/codex-run-audit
+abstract: "Offline analysis of explicit Codex execution JSONL exports into HTML and JSON reports for reported token usage, command failures, repeated activity, and source-order timelines."
+keywords:
+  - Codex
+  - token usage
+  - offline analysis
+  - developer tools

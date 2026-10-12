@@ -59,5 +59,5 @@
     ],
     "keyboard_skip_link": true
   },
-  "stability_policy": "docs/versioning.md"
+  "stability_policy": "https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/docs/versioning.md"
 }

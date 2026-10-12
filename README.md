@@ -185,7 +185,8 @@ is prepared; feedback is not a release requirement and no participant results ar
 [Contributing](CONTRIBUTING.md) · [Support](SUPPORT.md) · [Pilot protocol](docs/developer-pilot.md) · [Architecture](docs/architecture.md) · [Release checklist](docs/releasing.md)
 
 For tooling and documentation retrieval: [documentation index](llms.txt) and
-[machine-readable project facts](docs/project-facts.json).
+[machine-readable project facts](docs/project-facts.json). For attribution, use
+[the software citation](CITATION.cff).
 
 ## License and attribution
 

@@ -1,6 +1,6 @@
 # Architecture decision 001: a bounded offline analyzer
 
-Status: accepted for 0.1.0 preview, 2026-10-11.
+Status: originally accepted for the 0.1.0 development preview, 2026-10-11. The same architecture underlies the prepared 1.0.0 release; see versioning.md for the stable contract.
 
 The product first needs trustworthy measurements. Use TypeScript on Node 24 with no runtime dependencies. An explicit file import avoids private-history discovery and daemon lifecycle management.
 

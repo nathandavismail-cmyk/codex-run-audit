@@ -37,3 +37,5 @@ Node 24 is the tested runtime. macOS arm64 and Ubuntu CLI checks are recorded in
 validation. Native Codex tool execution and actual Safari opening remain
 unverified on this host; Windows, billing and raw session rollouts are outside
 the supported scope. These limits are not hidden behind a version number.
+
+This policy follows [Semantic Versioning 2.0.0](https://semver.org/) (accessed 2026-10-11), with the public contract defined above.
