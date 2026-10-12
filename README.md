@@ -2,13 +2,13 @@
 
 **Turn a Codex execution export into a report you can actually read.**
 
-An offline Codex run analyzer for token usage, command failures, repeated activity,
-and execution history. Get a local HTML report, inspect the evidence, and decide
-what to investigate next—without uploading your transcript or calling another model.
+Codex Run Audit is a free, open-source **offline analyzer for `codex exec --json` exports**.
+Inspect token usage, cached input, command failures, repeated activity, and execution
+history in a local HTML report. It runs without an API key, transcript upload, or model call.
 
 **1.0.0 · Node.js 24+ · TypeScript · MIT · Zero runtime dependencies**
 
-[Quick start](#quick-start) · [What it shows](#what-it-shows) · [Commands](#commands) · [Compatibility](docs/compatibility.md) · [Contributing](CONTRIBUTING.md)
+[Quick start](#quick-start) · [What it shows](#what-it-shows) · [Commands](#commands) · [Use cases](docs/use-cases.md) · [Compatibility](docs/compatibility.md) · [Contributing](CONTRIBUTING.md)
 
 ![Codex Run Audit showing recorded token usage and command activity in a local report. The displayed data is synthetic.](docs/assets/report-overview.png)
 
@@ -26,6 +26,12 @@ separate from zero**. Every diagnostic includes an evidence-specific next step.
 Use it for a single-run review, a debugging handoff, or a descriptive before/after
 comparison. It does not scan your account, estimate subscription allowance, or
 claim that fewer tokens mean better work.
+
+## Is this the right tool?
+
+Use Codex Run Audit when you have **one Codex execution JSONL export** and want to inspect its recorded token usage, investigate command failures, or share a local report. It also compares two reports while preserving unknown measurements.
+
+For account-wide spending, live monitoring, raw session-history analysis, or agent orchestration, choose a tool designed for that job. Codex Run Audit does not provide those capabilities. See the [use-case and tool-selection guide](docs/use-cases.md) for working examples and decision criteria.
 
 ## Quick start
 
@@ -130,7 +136,7 @@ Native tool probes encountered host sandbox restrictions. WebKit on Linux does
 not certify Safari integration on macOS. No productivity gain, token savings,
 or controlled model benchmark has been demonstrated.
 
-[Validation record](docs/validation.md) · [v1 readiness](docs/v1-readiness.md) · [Roadmap](docs/roadmap.md)
+[Release validation run](https://github.com/nathandavismail-cmyk/codex-run-audit/actions/runs/38207809697) · [Validation record](docs/validation.md) · [v1 readiness](docs/v1-readiness.md) · [Roadmap](docs/roadmap.md)
 
 ## Common questions
 

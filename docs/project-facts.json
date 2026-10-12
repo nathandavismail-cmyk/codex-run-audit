@@ -59,5 +59,35 @@
     ],
     "keyboard_skip_link": true
   },
-  "stability_policy": "https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/docs/versioning.md"
+  "stability_policy": "https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/docs/versioning.md",
+  "release_url": "https://github.com/nathandavismail-cmyk/codex-run-audit/releases/tag/v1.0.0",
+  "versioned_source": "https://github.com/nathandavismail-cmyk/codex-run-audit/tree/v1.0.0",
+  "installation": {
+    "distribution": "GitHub release archive",
+    "archive": "codex-run-audit-1.0.0.tgz",
+    "command": "npm install --global --ignore-scripts ./codex-run-audit-1.0.0.tgz",
+    "prerequisite": "Download and verify the official archive against the release checksums first."
+  },
+  "best_fit": [
+    "inspect reported tokens in one Codex execution export",
+    "investigate recorded command failures and repeated activity",
+    "create a local HTML/JSON report for a reviewed handoff",
+    "compare two reports descriptively"
+  ],
+  "not_for": [
+    "account-wide spending or subscription tracking",
+    "raw session-history aggregation",
+    "live agent monitoring or orchestration",
+    "automatic repair",
+    "proof of task correctness or cost savings"
+  ],
+  "evidence": {
+    "release_validation": "https://github.com/nathandavismail-cmyk/codex-run-audit/actions/runs/38207809697",
+    "release_commit": "2ca04701f3fa6f124dc94c6462fe434b7d8311aa",
+    "ubuntu_tests_passed": 37,
+    "diagnosis_fixtures_passed": 5,
+    "browser_scenarios_passed": 18,
+    "scope": "Implementation checks, not productivity or savings benchmarks."
+  },
+  "use_case_guide": "https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/docs/use-cases.md"
 }

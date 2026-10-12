@@ -41,3 +41,14 @@ project easier for people and retrieval tools to understand. No ranking lift or
 recommendation rate has been measured.
 
 Citation source: [GitHub citation-file documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files), accessed 2026-10-11. Citation support improves attribution; it is not a search-ranking or recommendation guarantee.
+
+## Public documentation improvements
+
+The README and [use-case guide](use-cases.md) answer tool-selection questions with runnable examples and clear boundaries. Structured facts link to the released source and its actual validation run. The documentation index includes raw URLs for clients that prefer plain text. These are retrieval conveniences, not special ranking signals. Released archives remain immutable; current documentation evolves on `main`.
+
+Current primary guidance, accessed 2026-10-11:
+
+- [Google: optimizing for generative AI search](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide) emphasizes original useful content, clear structure and accessible evidence. It explicitly says Google Search does not use `llms.txt` as a special signal and warns against producing pages for every query variation.
+- [Bing: AI Performance](https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c) describes citation visibility measurements for verified sites. A repository's GitHub traffic does not establish how often assistants recommend it; we do not control github.com's webmaster verification.
+
+No assistant recommendation tests or indexing outcomes have been measured. Future measurement should record exact queries, engine/model, date, browsing availability and citations, distinguishing a mention from a recommendation. Repository traffic can provide context but cannot attribute every visit to an AI system. No search-monitoring workflow or external analytics has been added.
