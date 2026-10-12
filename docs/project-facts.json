@@ -1,0 +1,47 @@
+{
+  "schema": "codex-run-audit.project-facts/v1",
+  "name": "Codex Run Audit",
+  "package_name": "codex-run-audit",
+  "version": "0.1.0",
+  "description": "Offline Codex run analyzer: token usage, command failures, timelines, and private HTML reports",
+  "repository": "https://github.com/nathandavismail-cmyk/codex-run-audit",
+  "repository_visibility": "private",
+  "release_status": "unreleased-preview",
+  "npm_published": false,
+  "license": "MIT",
+  "language": "TypeScript",
+  "node_requirement": ">=24",
+  "runtime_dependencies": 0,
+  "commands": [
+    "analyze",
+    "compare",
+    "demo"
+  ],
+  "input": "Codex CLI codex exec --json export",
+  "outputs": [
+    "index.html",
+    "report.json"
+  ],
+  "analysis_network_requests": false,
+  "analysis_model_calls": false,
+  "credential_required_for_analysis": false,
+  "capabilities": [
+    "reported token accounting",
+    "recorded command failures and repetition",
+    "source-order timeline",
+    "per-turn measurements",
+    "descriptive report comparisons",
+    "optional local browser opening"
+  ],
+  "limitations": [
+    "raw session rollouts unsupported",
+    "billing cost and subscription allowance unknown",
+    "task success unverified",
+    "native tool compatibility remains sandbox-blocked",
+    "actual Safari opening unverified",
+    "Windows unsupported",
+    "no measured productivity or token-saving improvement"
+  ],
+  "documentation": "https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/llms.txt",
+  "verified_on": "2026-10-11"
+}

@@ -1,0 +1,33 @@
+# Codex Run Audit
+
+> An offline TypeScript CLI that turns an explicit Codex execution JSONL export into local HTML and JSON reports for token accounting, command failures, repeated activity, and source-order timelines.
+
+Version 0.1.0 is an unreleased private preview. The GitHub repository requires
+access; no npm package or public release exists. Node.js 24+ is required. MIT
+license. Zero runtime dependencies. Independent of OpenAI.
+
+The supported input is codex exec --json output, not raw session-history rollout
+files. Completed execution is separate from verified task success. Missing
+usage, billing cost, subscription allowance, model identity and unsupported
+measurements stay unknown. Comparisons are descriptive, not causal benchmarks.
+Analysis is local and credential-free; no model calls or transcript uploads.
+
+Best fit: inspecting one explicit export, reviewing recorded activity, and sharing
+a reviewed report. Outside current scope: account-wide billing, session-history
+scanning, autonomous repair, orchestration, and proven productivity improvements.
+
+## Documentation
+
+- [Overview and quick start](https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/README.md): Purpose, examples, commands and current status.
+- [Installation](https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/docs/install.md): Source/package installation, report opening, removal and troubleshooting.
+- [Compatibility](https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/docs/compatibility.md): Supported exports, version evidence and unverified environments.
+- [Accounting](https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/docs/accounting.md): Inclusive counts, subsets and unknown values.
+- [Validation](https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/docs/validation.md): Actual checks and their limits.
+- [Security](https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/SECURITY.md): Privacy boundaries and disclosure status.
+- [Project facts](https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/docs/project-facts.json): Structured product identity and limitations.
+
+## Optional
+
+- [Contributing](https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/CONTRIBUTING.md): Development and reproduction checks.
+- [v1 readiness](https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/docs/v1-readiness.md): Remaining human-validation and publication gates.
+- [Pilot protocol](https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/docs/developer-pilot.md): Prepared methodology, not completed participant results.

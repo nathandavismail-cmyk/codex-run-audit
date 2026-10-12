@@ -8,8 +8,8 @@ America/Los_Angeles. User approved the name **Codex Run Audit**.
 - Owner: `nathandavismail-cmyk`, verified through the connected GitHub account.
 - Repository: [codex-run-audit](https://github.com/nathandavismail-cmyk/codex-run-audit).
 - Visibility: private, confirmed through GitHub after creation.
-- Description: Offline reports for Codex execution exports, with conservative token accounting and evidence-based follow-up guidance.
-- Topics: `codex`, `typescript`, `cli`, `developer-tools`, `observability`.
+- Description: Offline Codex run analyzer for token usage, command failures, timelines, and private HTML reports.
+- Topics include `codex`, `codex-cli`, `openai-codex`, `token-usage`, `agent-observability`, `jsonl`, `offline`, `html-report`, `typescript`, `cli`, `developer-tools`, and `observability`.
 - Default branch: `main`; license MIT; 0.1.0 remains unreleased.
 - Existing source includes contributing/security/conduct policies and issue/PR templates.
 
@@ -36,3 +36,5 @@ verified private security-reporting channel; review archive contents and commit
 metadata; run the consenting-developer pilot; publish evidence and limitations.
 Name searches and npm E404 are not legal clearance or package reservation.
 The project is independent of OpenAI. No invitations, public announcements, npm publication or GitHub releases have been made. Artifact storage was full during validation; synthetic screenshots can also be recovered from the bounded CI log output. Artifact-upload failure is reported separately and does not mask a failing test.
+
+README, package keywords, `llms.txt`, and structured project facts are prepared for accurate discovery. Public indexing remains blocked by private visibility; see [discoverability](discoverability.md). No recommendation ranking or search-traffic lift is claimed.
