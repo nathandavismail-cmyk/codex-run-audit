@@ -6,7 +6,7 @@ An offline Codex run analyzer for token usage, command failures, repeated activi
 and execution history. Get a local HTML report, inspect the evidence, and decide
 what to investigate next—without uploading your transcript or calling another model.
 
-**1.0.0 release candidate · Node.js 24+ · TypeScript · MIT · Zero runtime dependencies**
+**1.0.0 · Node.js 24+ · TypeScript · MIT · Zero runtime dependencies**
 
 [Quick start](#quick-start) · [What it shows](#what-it-shows) · [Commands](#commands) · [Compatibility](docs/compatibility.md) · [Contributing](CONTRIBUTING.md)
 
@@ -29,8 +29,8 @@ claim that fewer tokens mean better work.
 
 ## Quick start
 
-Requires **Node.js 24 or later** and access to this currently private repository.
-The package is not published to npm.
+Requires **Node.js 24 or later**. [Download version 1.0.0](https://github.com/nathandavismail-cmyk/codex-run-audit/releases/tag/v1.0.0) or build from source below.
+The package is not published to npm; use the official GitHub release archive.
 
 ```sh
 git clone https://github.com/nathandavismail-cmyk/codex-run-audit.git
@@ -115,7 +115,7 @@ consume allowance; this analyzer does not launch it.
 
 ## What is verified today?
 
-This is **1.0.0, prepared for its first public release; not yet published**. The [1.x compatibility policy](docs/versioning.md) defines the supported contract.
+This is **1.0.0, the first public release**. The [1.x compatibility policy](docs/versioning.md) defines the supported contract.
 
 | Check | Evidence |
 | --- | --- |

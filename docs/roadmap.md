@@ -10,9 +10,9 @@
 
 1. Completed: one authorized real no-tool export and native mocked success/failure, with exact CLI version. Pending: successful native tool execution outside the nested sandbox.
 2. Completed: Ubuntu installation, package, Chromium, WebKit and Firefox report checks plus desktop/mobile screenshot review. Actual Safari integration and Windows remain separately planned.
-3. Completed: rename to Codex Run Audit and point-in-time registry lookup. Completed: approved private GitHub repository. Prepared: GitHub private vulnerability report form. Activation and verification remain part of an authorized public launch.
+3. Completed: rename to Codex Run Audit and point-in-time registry lookup. Completed: public GitHub repository and enabled private vulnerability reporting.
 4. Completed on macOS: fresh source installation, direct Git preparation, archive inspection and installed-package/uninstall checks.
-5. Completed: approved private repository and manual Ubuntu validation workflow. npm and public launch remain separate approval gates.
+5. Completed: public repository, GitHub release and manual Ubuntu validation workflow. npm publication is blocked by missing publisher authentication.
 
 See [launch preparation](launch.md) for the repository and checks.
 

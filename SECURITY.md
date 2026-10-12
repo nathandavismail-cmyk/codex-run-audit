@@ -12,20 +12,10 @@ JSON reports are not signed. An attacker who can replace reports can replace the
 
 ## Supported versions
 
-The latest 1.x release line is supported. Version 1.0.0 is prepared but not yet published. macOS and Ubuntu checks are recorded in [validation](docs/validation.md); Windows compatibility remains a separate gate. Do not assume cross-platform protection from POSIX-specific checks.
+The latest 1.x release line is supported. Version 1.0.0 is the first public release. macOS and Ubuntu checks are recorded in [validation](docs/validation.md); Windows compatibility remains a separate gate. Do not assume cross-platform protection from POSIX-specific checks.
 
 ## Reporting
 
-Do not put raw sessions, credentials or exploitable private details in public issues. The repository is currently private; no public-facing reporting endpoint is active.
-GitHub private vulnerability reporting is the intended disclosure channel when
-public distribution is authorized. It avoids requiring a separate public email
-address. A custom report form is prepared in `.github/VULNERABILITY_REPORT.yml`.
+Use [GitHub private vulnerability reporting](https://github.com/nathandavismail-cmyk/codex-run-audit/security/advisories/new). The feature is enabled; the public Security → Advisories page exposes “Report a vulnerability”. Reporting requires a GitHub login. No test vulnerability was submitted.
 
-At authorized public launch, enable the feature, verify the “Report a vulnerability”
-button at the repository Security → Advisories page, and link that verified page
-here before announcing availability. Do not submit a fake vulnerability just to
-test notifications. A prepared form does not mean the feature is enabled.
-
-GitHub documents this feature for public repositories:
-[private vulnerability reporting](https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/configure-vulnerability-reporting/configure-for-a-repository)
-(accessed 2026-10-11). We have not changed repository visibility to enable it.
+Do not put raw sessions, credentials or exploitable private details in public issues. Include a minimal synthetic reproduction, affected version and expected impact. See the custom report form for suggested details. Responses are best-effort; there is no guaranteed response time.

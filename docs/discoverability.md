@@ -1,8 +1,6 @@
 # Repository and AI-tool discoverability
 
-Reviewed 2026-10-11. The repository remains **private**. These changes prepare
-accurate discovery; they do not make private content publicly indexable or
-promise that any assistant will recommend the product.
+Reviewed 2026-10-11. The repository is **public**. These changes support accurate discovery; they do not promise indexing or that any assistant will recommend the product.
 
 ## Implemented
 
@@ -23,13 +21,7 @@ promise that any assistant will recommend the product.
 
 ## Limits and next steps
 
-Private repositories are visible only to authorized readers. Public discovery
-requires separate approval to change visibility, plus the release/security gates.
-No visibility changes, directory submissions, endorsements, outreach or public
-announcements were made during this pass.
-
-After authorized publication: verify all anonymous links, update private/unreleased
-status consistently, then inspect actual referral traffic and user feedback. If
+Public visibility is enabled. No directory submissions, endorsements or outreach were performed. Monitor actual referral traffic rather than assuming a ranking benefit. If
 a public documentation site is approved later, publish the index under a stable
 URL and configure that site's metadata there. A repository cannot set headers,
 robots rules, or sitemap behavior for all of github.com.

@@ -1,11 +1,11 @@
 # Changelog
 
-Changes follow semantic versioning. Until 1.0, minor releases may revise adapter support; machine-readable schema revisions are explicit.
+Changes follow semantic versioning and the [1.x compatibility policy](docs/versioning.md). Machine-readable schema revisions are explicit.
 
-## 1.0.0 — Unreleased
+## 1.0.0 — 2026-10-11
 
 - Make developer feedback optional rather than a release gate.
-- Prepare GitHub private vulnerability reporting for an authorized public launch.
+- Enable GitHub private vulnerability reporting for the public repository.
 - Extend manual Ubuntu browser coverage to Firefox and verify keyboard access to the skip link.
 
 - Add opt-in `--open` for generated reports, encoded browser URLs and recoverable headless-launch failures.
@@ -34,4 +34,4 @@ Changes follow semantic versioning. Until 1.0, minor releases may revise adapter
 - Add native mock-provider failure coverage with unknown usage and private errors omitted.
 - Explain missing tool telemetry in reports after live tool probes encountered sandbox restrictions without command events.
 
-No npm package, GitHub release, or real-model benchmark has been published.
+Distributed through GitHub release archives. No npm package or real-model benchmark has been published.

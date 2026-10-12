@@ -3,12 +3,11 @@
 Requires Node.js 24+ and npm. Check `node --version` before installing. Codex
 itself is only needed to capture new exports, not to run this analyzer.
 macOS arm64 and Ubuntu with Node 24 are tested for installation and CLI behavior. Windows remains a separate validation gate.
-The GitHub repository is private; access is required. The package is not published to npm. Never install an unrelated
-package merely because its name matches a draft project name.
+The GitHub repository is public. The package is not published to npm; use the official [1.0.0 release](https://github.com/nathandavismail-cmyk/codex-run-audit/releases/tag/v1.0.0) archives. Never install an unrelated package merely because its name matches.
 
 ## Source checkout or source ZIP
 
-Clone `https://github.com/nathandavismail-cmyk/codex-run-audit` using your authorized GitHub credentials and change into that directory. For the local source ZIP, extract it
+Clone `https://github.com/nathandavismail-cmyk/codex-run-audit` without credentials and change into that directory. For the local source ZIP, extract it
 and change into `codex-run-audit/`. Then:
 
 ```sh
@@ -26,9 +25,8 @@ to overwrite it; use `node dist/src/cli.js demo --out reports/another-demo`.
 
 ## Packaged command
 
-From a source checkout, create the archive with `npm pack`. Or use an explicitly
-provided project release archive, verifying its checksum against its source.
-Install the archive you actually downloaded:
+Download `codex-run-audit-1.0.0.tgz` and `codex-run-audit-checksums.txt` from the official release. Compare its SHA-256 with the matching entry using `shasum -a 256 codex-run-audit-1.0.0.tgz` (macOS) or `sha256sum codex-run-audit-1.0.0.tgz` (Linux). Checksums detect corrupted downloads; they are not signed provenance. You can also build an archive from source with `npm pack`.
+Install the verified archive:
 
 ```sh
 npm install --global --ignore-scripts ./codex-run-audit-1.0.0.tgz

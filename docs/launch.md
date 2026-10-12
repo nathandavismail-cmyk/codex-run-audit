@@ -1,45 +1,20 @@
-# Launch preparation
+# Public launch
 
-Status: private GitHub repository created and pushed with explicit user approval; npm/public release pending. Reviewed 2026-10-11 in
-America/Los_Angeles. User approved the name **Codex Run Audit**.
+Version 1.0.0 is distributed through the [public GitHub repository](https://github.com/nathandavismail-cmyk/codex-run-audit) and [release archives](https://github.com/nathandavismail-cmyk/codex-run-audit/releases/tag/v1.0.0). Launch authorized 2026-10-11 (America/Los_Angeles).
 
-## GitHub setup
+- MIT license, Node 24+, zero runtime dependencies; stable CLI and v1 report contract.
+- Private vulnerability reporting enabled and its public reporting link verified. Secret scanning and push protection enabled.
+- README, actual report screenshot, topics, package keywords, citation, `llms.txt` and structured facts describe supported functionality without promised rankings or endorsements.
+- Release assets include a prebuilt package, source ZIP and SHA-256 checksums. Checksums are not signed provenance.
+- npm publication is blocked by missing publisher authentication; never substitute an unrelated similarly named package.
+- Historical Git author metadata is preserved, including older local-machine identities. Archives exclude Git history.
 
-- Owner: `nathandavismail-cmyk`, verified through the connected GitHub account.
-- Repository: [codex-run-audit](https://github.com/nathandavismail-cmyk/codex-run-audit).
-- Visibility: private, confirmed through GitHub after creation.
-- Description: Offline Codex run analyzer for token usage, command failures, timelines, and private HTML reports.
-- Topics include `codex`, `codex-cli`, `openai-codex`, `token-usage`, `agent-observability`, `jsonl`, `offline`, `html-report`, `typescript`, `cli`, `developer-tools`, and `observability`.
-- Default branch: `main`; license MIT; 1.0.0 remains unreleased.
-- Existing source includes contributing/security/conduct policies and issue/PR templates.
+## Validation
 
-The reviewed history is pushed; package metadata has actual repository/homepage/issue URLs. A fresh authenticated remote clone passed clean installation, demo and package installation/removal checks. Do not publish to npm or create releases as part
-of repository creation alone. Older development commits retain their original
-inferred author metadata; history has not been rewritten.
+The approved manual Ubuntu workflow has a 10-minute timeout, runs only on request, uses Node 24 and makes no model calls. Unit/integration, package install/uninstall, diagnosis fixtures and 18 Chromium/WebKit/Firefox scenarios are covered. See [validation](validation.md).
 
-## Approved opt-in Ubuntu validation
+Native tool execution remains host-sandbox-blocked; actual Safari opening and Windows remain unverified. Developer feedback is optional. No productivity or token-savings outcome is claimed.
 
-The user explicitly approved creation and execution. The workflow is `.github/workflows/validate.yml`; it never runs on pushes or pull requests.
+GitHub artifact storage was full during earlier validation; upload warnings are separate from test results. Synthetic screenshots are also emitted in bounded CI logs. Release assets use GitHub Releases, not Actions artifact storage.
 
-One manually dispatched `ubuntu-latest` job, read-only repository permission,
-Node 24, 10-minute timeout, no push/PR schedule or macOS runner. Run clean install,
-quality checks, package install/uninstall, and a bounded browser report smoke
-test with screenshots for human inspection. No model calls or credentials are
-needed for offline checks. GitHub Actions minutes may be consumed. Native Codex
-tool execution should use an isolated mock provider where feasible; it remains
-a distinct check from parser/renderer tests.
-
-## Before public launch
-
-Finish or explicitly narrow Linux/visual/tool support claims; configure a
-verified private security-reporting channel; review archive contents and commit
-metadata; publish evidence and limitations. Developer feedback is optional, not a release gate.
-Name searches and npm E404 are not legal clearance or package reservation.
-The project is independent of OpenAI. No invitations, public announcements, npm publication or GitHub releases have been made. Artifact storage was full during validation; synthetic screenshots can also be recovered from the bounded CI log output. Artifact-upload failure is reported separately and does not mask a failing test.
-
-README, package keywords, `llms.txt`, and structured project facts are prepared for accurate discovery. Public indexing remains blocked by private visibility; see [discoverability](discoverability.md). No recommendation ranking or search-traffic lift is claimed.
-
-For the first public release, version 1.0.0 is prepared with a documented stable
-CLI/schema contract, support guide, citation metadata and local release notes.
-Publication remains pending; unverified compatibility is recorded, not silently
-promoted to a supported claim.
+No public announcements, participant outreach or paid model trials were performed for launch.

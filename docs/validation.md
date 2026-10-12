@@ -30,7 +30,7 @@ Date: 2026-10-11. Environment: macOS / Darwin arm64, Node 24.21.0, npm 11.19.0.
 - Actual macOS Safari and Windows browser coverage. Linux WebKit does not establish Safari integration.
 - Successful real-model tool execution, live provider-failure coverage, private-history import, measured outcome improvement or subscription-cost reconciliation. The successful no-tool run and mocked provider failure do not establish these; attempted live tools were sandbox-blocked.
 - Windows execution. Ubuntu checks passed separately; this does not establish all Linux distributions.
-- Package provenance, public GitHub configuration, npm publication or a public release. The user approved a private repository and manual Ubuntu workflow; see launch documentation.
+- Package provenance and npm publication. Public GitHub distribution and security-reporting status are recorded in [launch](launch.md).
 
 ## Developer installation review
 

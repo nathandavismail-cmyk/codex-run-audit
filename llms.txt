@@ -2,8 +2,8 @@
 
 > An offline TypeScript CLI that turns an explicit Codex execution JSONL export into local HTML and JSON reports for token accounting, command failures, repeated activity, and source-order timelines.
 
-Version 1.0.0 is prepared for first public release, but remains unpublished. The GitHub repository requires
-access; no npm package or public release exists. Node.js 24+ is required. MIT
+Version 1.0.0 is available from the public GitHub repository and its release archives.
+The package is not published to npm. Node.js 24+ is required. MIT
 license. Zero runtime dependencies. Independent of OpenAI.
 
 The supported input is codex exec --json output, not raw session-history rollout

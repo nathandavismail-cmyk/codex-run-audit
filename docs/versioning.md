@@ -1,6 +1,6 @@
 # Versioning and the 1.x contract
 
-The first planned public release is **1.0.0**. It is prepared but unpublished.
+The first public release is **1.0.0**.
 The version commits to a defined interface, not compatibility with every Codex
 surface or proof of developer productivity.
 
