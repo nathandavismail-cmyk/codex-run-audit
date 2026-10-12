@@ -24,6 +24,7 @@ const root = await mkdtemp(join(tmpdir(), 'codex-run-audit-native-'));
 const home = join(root, 'home');
 await mkdir(home);
 const requests = [];
+const toolEvidence = [];
 const item = {
   id: 'mock_message',
   type: 'message',
@@ -37,6 +38,12 @@ const server = createServer(async (req, res) => {
   requests.push({ method: req.method, path: req.url });
   let body = '';
   for await (const chunk of req) body += chunk;
+  if (toolMode)
+    toolEvidence.push(
+      ...(JSON.parse(body).input ?? []).filter(
+        (entry) => entry.type === 'function_call_output',
+      ),
+    );
   let responseItem = item;
   if (toolMode && requests.filter((r) => r.method === 'POST').length === 1) {
     const tools = JSON.parse(body).tools ?? [];
@@ -221,6 +228,8 @@ stream_max_retries = 0
     });
   }
   if (toolMode) {
+    console.log('SYNTHETIC_TOOL_EVIDENCE ' + JSON.stringify(toolEvidence));
+    console.log('SYNTHETIC_EXPORT ' + scrubbed.replaceAll('\n', ' '));
     assert.equal(
       report.activity.commands,
       1,

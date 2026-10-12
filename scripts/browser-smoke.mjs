@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -68,6 +68,16 @@ try {
         path: path.join(output, `${name}-${width}.png`),
         fullPage: true,
       });
+      if (process.argv.includes('--emit-screenshots')) {
+        const file = `${name}-${width}.png`;
+        const base64 = (await readFile(path.join(output, file))).toString(
+          'base64',
+        );
+        for (let offset = 0; offset < base64.length; offset += 1000)
+          console.log(
+            `CRA_IMAGE ${file} ${offset / 1000} ${base64.slice(offset, offset + 1000)}`,
+          );
+      }
       checked.push({ name, width });
     }
     await page.close();
