@@ -9,9 +9,15 @@ import { parseExport } from '../dist/src/parser.js';
 
 const output = process.argv[2];
 const failProvider = process.argv[3] === '--fail-provider';
-if (!output || (process.argv[3] && !failProvider) || process.argv.length > 4)
+const toolMode = ['--tool-success', '--tool-failure'].includes(process.argv[3]);
+const failCommand = process.argv[3] === '--tool-failure';
+if (
+  !output ||
+  (process.argv[3] && !failProvider && !toolMode) ||
+  process.argv.length > 4
+)
   throw new Error(
-    'Usage: node scripts/capture-native.mjs <new-output-dir> [--fail-provider]',
+    'Usage: node scripts/capture-native.mjs <new-output-dir> [--fail-provider|--tool-success|--tool-failure]',
   );
 await mkdir(resolve(output), { recursive: false, mode: 0o700 });
 const root = await mkdtemp(join(tmpdir(), 'codex-run-audit-native-'));
@@ -27,9 +33,33 @@ const item = {
     { type: 'output_text', text: 'RUNLENS_SYNTHETIC_OK', annotations: [] },
   ],
 };
-const server = createServer((req, res) => {
+const server = createServer(async (req, res) => {
   requests.push({ method: req.method, path: req.url });
-  req.resume();
+  let body = '';
+  for await (const chunk of req) body += chunk;
+  let responseItem = item;
+  if (toolMode && requests.filter((r) => r.method === 'POST').length === 1) {
+    const tools = JSON.parse(body).tools ?? [];
+    const tool = tools.find((t) =>
+      ['shell_command', 'exec_command'].includes(t.name),
+    );
+    if (!tool) {
+      res.writeHead(400).end('Expected shell tool unavailable');
+      return;
+    }
+    const command = failCommand
+      ? "/bin/sh -c 'exit 7'"
+      : '/usr/bin/printf CODEX_AUDIT_TOOL_OK';
+    responseItem = {
+      type: 'function_call',
+      id: 'mock_call',
+      call_id: 'probe_call',
+      name: tool.name,
+      arguments: JSON.stringify(
+        tool.name === 'exec_command' ? { cmd: command } : { command },
+      ),
+    };
+  }
   if (req.method !== 'POST' || req.url !== '/v1/responses') {
     res.writeHead(404).end();
     return;
@@ -58,15 +88,15 @@ const server = createServer((req, res) => {
     {
       type: 'response.output_item.added',
       output_index: 0,
-      item: { ...item, status: 'in_progress', content: [] },
+      item: { ...responseItem, status: 'in_progress', content: [] },
     },
-    { type: 'response.output_item.done', output_index: 0, item },
+    { type: 'response.output_item.done', output_index: 0, item: responseItem },
     {
       type: 'response.completed',
       response: {
         id: 'mock_response',
         status: 'completed',
-        output: [item],
+        output: [responseItem],
         usage: {
           input_tokens: 100,
           input_tokens_details: { cached_tokens: 60 },
@@ -168,7 +198,10 @@ stream_max_retries = 0
     failProvider ? 1 : 0,
     'Unexpected Codex exit code; inspect local diagnostics',
   );
-  assert.equal(requests.filter((r) => r.method === 'POST').length, 1);
+  assert.equal(
+    requests.filter((r) => r.method === 'POST').length,
+    toolMode ? 2 : 1,
+  );
   const report = parseExport(
     await readFile(join(output, 'export.jsonl'), 'utf8'),
     true,
@@ -180,12 +213,31 @@ stream_max_retries = 0
     assert.equal(report.turns[0].status, 'failed');
   } else {
     assert.deepEqual(report.usage, {
-      input: 100,
-      cachedInput: 60,
-      uncachedInput: 40,
-      output: 20,
-      reasoningOutput: 5,
+      input: toolMode ? 200 : 100,
+      cachedInput: toolMode ? 120 : 60,
+      uncachedInput: toolMode ? 80 : 40,
+      output: toolMode ? 40 : 20,
+      reasoningOutput: toolMode ? 10 : 5,
     });
+  }
+  if (toolMode) {
+    assert.equal(
+      report.activity.commands,
+      1,
+      'Expected exactly one completed command event',
+    );
+    assert.equal(report.activity.failedCommands, failCommand ? 1 : 0);
+    const events = scrubbed
+      .trim()
+      .split('\n')
+      .map((line) => JSON.parse(line));
+    const command = events.find(
+      (e) =>
+        e.type === 'item.completed' && e.item?.type === 'command_execution',
+    );
+    assert.equal(command.item.exit_code, failCommand ? 7 : 0);
+    if (!failCommand)
+      assert.ok(command.item.aggregated_output.includes('CODEX_AUDIT_TOOL_OK'));
   }
   await writeFile(
     join(output, 'metadata.json'),
@@ -198,7 +250,7 @@ stream_max_retries = 0
         node: process.version,
         synthetic: true,
         provider: 'loopback mock; no model inference',
-        scenario: failProvider ? 'provider-failure' : 'success',
+        scenario: process.argv[3] ?? 'success',
         requests,
         reportUsage: report.usage,
       },

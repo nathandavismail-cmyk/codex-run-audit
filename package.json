@@ -32,11 +32,21 @@
     "demo": "npm run build && node dist/src/cli.js demo --out reports/demo",
     "prepack": "npm run check",
     "prepare": "npm run build",
-    "test:package": "npm run build && node scripts/package-smoke.mjs"
+    "test:package": "npm run build && node scripts/package-smoke.mjs",
+    "test:browser": "node scripts/browser-smoke.mjs"
   },
   "devDependencies": {
-    "typescript": "7.0.2",
+    "@biomejs/biome": "2.5.15",
     "@types/node": "24.19.2",
-    "@biomejs/biome": "2.5.15"
+    "playwright": "1.64.0",
+    "typescript": "7.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathandavismail-cmyk/codex-run-audit.git"
+  },
+  "homepage": "https://github.com/nathandavismail-cmyk/codex-run-audit#readme",
+  "bugs": {
+    "url": "https://github.com/nathandavismail-cmyk/codex-run-audit/issues"
   }
 }

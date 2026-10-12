@@ -1,0 +1,93 @@
+import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
+import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { chromium } from 'playwright';
+
+const output = path.resolve(process.argv[2] ?? 'artifacts/browser');
+await mkdir(path.dirname(output), { recursive: true });
+await mkdir(output);
+const root = await mkdtemp(path.join(tmpdir(), 'codex-audit-browser-'));
+const cli = path.resolve('dist/src/cli.js');
+const run = (args) =>
+  execFileSync(process.execPath, [cli, ...args], { timeout: 10_000 });
+let browser;
+try {
+  run(['demo', '--out', path.join(root, 'demo')]);
+  run([
+    'analyze',
+    'tests/fixtures/native-provider-failure.jsonl',
+    '--synthetic',
+    '--out',
+    path.join(root, 'failure'),
+  ]);
+  run([
+    'compare',
+    path.join(root, 'demo', 'report.json'),
+    path.join(root, 'failure', 'report.json'),
+    '--out',
+    path.join(root, 'comparison'),
+  ]);
+  browser = await chromium.launch({ headless: true });
+  const errors = [];
+  const externalRequests = [];
+  const checked = [];
+  for (const width of [1280, 390]) {
+    const page = await browser.newPage({ viewport: { width, height: 900 } });
+    page.on('pageerror', (error) => errors.push(error.message));
+    await page.route(/^https?:/, (route) => {
+      externalRequests.push(route.request().url());
+      return route.abort();
+    });
+    for (const name of ['demo', 'failure', 'comparison']) {
+      await page.goto(pathToFileURL(path.join(root, name, 'index.html')).href);
+      assert.equal(await page.locator('h1').count(), 1);
+      assert.ok(
+        (await page.locator('body').innerText()).includes(
+          'Synthetic demonstration',
+        ),
+      );
+      assert.equal(await page.locator('script').count(), 0);
+      assert.ok(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth <= window.innerWidth,
+        ),
+        `${name} overflows at ${width}px`,
+      );
+      if (name !== 'comparison') {
+        assert.ok(
+          (await page.locator('body').innerText()).includes('Next step:'),
+        );
+        await page.locator('summary').click();
+        assert.equal(await page.locator('details').getAttribute('open'), '');
+        assert.equal(await page.locator('a[href="report.json"]').count(), 1);
+      }
+      await page.screenshot({
+        path: path.join(output, `${name}-${width}.png`),
+        fullPage: true,
+      });
+      checked.push({ name, width });
+    }
+    await page.close();
+  }
+  assert.deepEqual(errors, []);
+  assert.deepEqual(externalRequests, []);
+  const result = {
+    passed: true,
+    browser: browser.version(),
+    platform: process.platform,
+    checked,
+    pageErrors: errors.length,
+    externalRequests: externalRequests.length,
+  };
+  await writeFile(
+    path.join(output, 'results.json'),
+    `${JSON.stringify(result, null, 2)}\n`,
+  );
+  console.log(JSON.stringify(result));
+} finally {
+  await browser?.close();
+  await rm(root, { recursive: true, force: true });
+}
