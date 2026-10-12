@@ -24,6 +24,7 @@ test('help, version and invalid arguments have predictable exit codes', () => {
     ['demo'],
     ['demo', '--out', 'x', '--out', 'y'],
     ['demo', '--oops'],
+    ['demo', '--out', 'x', '--open', '--open'],
   ])
     assert.equal(invoke(...args).status, 1);
 });
@@ -170,6 +171,39 @@ test('CLI distinguishes missing inputs and existing output safely', async () => 
     assert.ok(!missing.stderr.includes('PRIVATE_NAME'));
     const existing = invoke('demo', '--out', dir);
     assert.match(existing.stderr, /already exists/);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test('headless Linux --open failure preserves a usable report and success exit', {
+  skip: process.platform !== 'linux',
+}, async () => {
+  const dir = await mkdtemp(path.join(os.tmpdir(), 'codex-audit-open-'));
+  try {
+    const out = path.join(dir, 'report # with spaces');
+    const result = spawnSync(
+      process.execPath,
+      [cli, 'demo', '--out', out, '--open'],
+      {
+        encoding: 'utf8',
+        env: { ...process.env, PATH: '' },
+        timeout: 10000,
+      },
+    );
+    assert.equal(result.status, 0);
+    assert.match(result.stderr, /report was saved successfully/);
+    assert.match(result.stdout, /Browser URL: file:/);
+    assert.match(result.stdout, /%23/);
+    assert.equal(
+      JSON.parse(await readFile(path.join(out, 'report.json'), 'utf8')).usage
+        .input,
+      12500,
+    );
+    assert.match(
+      await readFile(path.join(out, 'index.html'), 'utf8'),
+      /Run overview/,
+    );
   } finally {
     await rm(dir, { recursive: true, force: true });
   }

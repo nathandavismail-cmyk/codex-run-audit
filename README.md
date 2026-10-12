@@ -23,7 +23,7 @@ npm run check
 npm run demo
 ```
 
-Open `reports/demo/index.html` in your browser. The demo is visibly **synthetic**. Re-running it refuses to overwrite the existing report; choose another output directory:
+Add `--open` to open the generated report automatically (Safari on macOS; your desktop HTML handler on Linux). Without it, the CLI prints a browser-ready file URL. Open `reports/demo/index.html` in your browser. The demo is visibly **synthetic**. Re-running it refuses to overwrite the existing report; choose another output directory:
 
 ```sh
 node dist/src/cli.js demo --out reports/demo-2

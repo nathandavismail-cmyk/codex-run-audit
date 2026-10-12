@@ -1,20 +1,23 @@
 #!/usr/bin/env node
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { compareReports } from './compare.js';
 import { readInput, writeBundle } from './io.js';
 import { VERSION } from './model.js';
+import { openReport } from './open.js';
 import { parseExport } from './parser.js';
 import { renderComparison, renderReport } from './render.js';
 
 const help = `Codex Run Audit ${VERSION} — local reports for Codex execution exports
 
-  codex-run-audit analyze <export.jsonl> --out <new-directory> [--synthetic]
-  codex-run-audit compare <baseline.json> <candidate.json> --out <new-directory>
-  codex-run-audit demo --out <new-directory>
+  codex-run-audit analyze <export.jsonl> --out <new-directory> [--synthetic] [--open]
+  codex-run-audit compare <baseline.json> <candidate.json> --out <new-directory> [--open]
+  codex-run-audit demo --out <new-directory> [--open]
   codex-run-audit --help
   codex-run-audit --version
 
+--open uses Safari on macOS or the desktop HTML handler on Linux.
+Browser launch failure preserves the report and prints a warning.
 No model calls, telemetry, or automatic session scanning.
 Existing output directories are never overwritten. Raw rollout files are unsupported.
 Demo data is synthetic. Execution completion does not establish task success.`;
@@ -38,13 +41,15 @@ async function main(args: string[]): Promise<void> {
   const positionals: string[] = [];
   let out: string | undefined;
   let synthetic = false;
+  let open = false;
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
     if (arg === '--out') {
       if (out || !args[i + 1] || args[i + 1]?.startsWith('--'))
         throw new Error('--out requires one directory');
       out = args[++i];
-    } else if (arg === '--synthetic' && command === 'analyze' && !synthetic)
+    } else if (arg === '--open' && !open) open = true;
+    else if (arg === '--synthetic' && command === 'analyze' && !synthetic)
       synthetic = true;
     else if (arg?.startsWith('-'))
       throw new Error('Unknown option; run codex-run-audit --help');
@@ -53,11 +58,13 @@ async function main(args: string[]): Promise<void> {
   const expected = command === 'compare' ? 2 : command === 'analyze' ? 1 : 0;
   if (positionals.length !== expected || !out)
     throw new Error('Invalid arguments; run codex-run-audit --help');
+  let outputDirectory: string;
   if (command === 'compare') {
     const a = JSON.parse(await readInput(positionals[0] ?? '')) as unknown;
     const b = JSON.parse(await readInput(positionals[1] ?? '')) as unknown;
     const report = compareReports(a, b);
     const dir = await writeBundle(out, report, renderComparison(report));
+    outputDirectory = dir;
     console.log(
       `Comparison written to ${path.join(dir, 'index.html')}\nDescriptive only; task equivalence is unknown.`,
     );
@@ -73,10 +80,17 @@ async function main(args: string[]): Promise<void> {
       command === 'demo' || synthetic,
     );
     const dir = await writeBundle(out, report, renderReport(report));
+    outputDirectory = dir;
     console.log(
       `Report written to ${path.join(dir, 'index.html')}\nExecution: ${report.execution}; task correctness: unverified.${report.synthetic ? '\nSYNTHETIC DEMONSTRATION — not a real benchmark.' : ''}`,
     );
   }
+  const reportPath = path.join(outputDirectory, 'index.html');
+  console.log(`Browser URL: ${pathToFileURL(reportPath).href}`);
+  if (open && !(await openReport(reportPath)))
+    console.error(
+      'Warning: Could not open a browser. The report was saved successfully. Open the Browser URL manually.',
+    );
 }
 main(process.argv.slice(2)).catch((error: unknown) => {
   // Never echo JSON parser snippets, source payloads, or system error paths.

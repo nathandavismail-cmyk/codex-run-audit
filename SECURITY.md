@@ -8,7 +8,7 @@ Input and output are untrusted. The parser bounds file size, line size, event co
 
 Inputs must be regular files; direct symlinks and FIFOs are rejected. Output is created in a new directory with exclusive file creation and POSIX permission restrictions. Parent-directory symlinks are resolved. The tool is not a security boundary against a hostile process simultaneously replacing directories owned by the same user. Only use output parents you control.
 
-JSON reports are not signed. An attacker who can replace reports can replace their measurements and hashes. Comparison validates accounting fields but does not authenticate the originating run. A valid report never grants execution permission.
+JSON reports are not signed. An attacker who can replace reports can replace their measurements and hashes. Comparison validates accounting fields but does not authenticate the originating run. A valid report never grants execution permission. Explicit `--open` launches a fixed OS opener with the newly generated local file URL as a separate argument, without a shell. It does not accept executable names or commands from input. Linux uses the user-controlled desktop HTML association.
 
 ## Supported versions
 

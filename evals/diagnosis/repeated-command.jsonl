@@ -1,0 +1,5 @@
+{"type":"thread.started"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"a","type":"command_execution","command":"npm test","status":"completed","exit_code":0}}
+{"type":"item.completed","item":{"id":"b","type":"command_execution","command":"npm test","status":"completed","exit_code":0}}
+{"type":"turn.completed","usage":{"input_tokens":100,"cached_input_tokens":60,"output_tokens":20}}

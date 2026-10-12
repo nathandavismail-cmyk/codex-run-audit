@@ -3,6 +3,14 @@
 Status: prepared, not conducted. No participants were contacted and no outcome
 improvement is claimed. Start with 3–5 consenting developers using local exports.
 
+## Ready-to-run materials
+
+The source checkout includes `evals/diagnosis/participant.md`, a separate
+facilitator answer sheet, an empty response ledger, five original synthetic
+exports, and a checksum manifest. Run `npm run eval:fixtures -- /path/to/new-results`
+to verify fixtures and produce reports. Results are labeled fixture conformance,
+not human evaluation findings. No participants have been contacted.
+
 ## Reader exercise
 
 Use a fresh checkout or release archive and the installation guide. Ask the

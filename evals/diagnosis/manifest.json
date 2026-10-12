@@ -1,0 +1,55 @@
+{
+  "synthetic": true,
+  "cases": [
+    {
+      "file": "missing-usage.jsonl",
+      "sha256": "fcdff65e0adad8fef492f788fb80a3e545bfcb188c0375726c8b62eca913691f",
+      "expected": {
+        "execution": "completed",
+        "input": null,
+        "failedCommands": 0,
+        "repeatedCommands": 0
+      }
+    },
+    {
+      "file": "failed-command.jsonl",
+      "sha256": "6d1d49b4b799f6d384e287ce7439a60ab5daae59a8552a12b4d5044d5305a386",
+      "expected": {
+        "execution": "completed",
+        "input": 100,
+        "failedCommands": 1,
+        "repeatedCommands": 0
+      }
+    },
+    {
+      "file": "repeated-command.jsonl",
+      "sha256": "dc6dc92a7f1f8927d67ab9b4b50271db7ec938be93c4a145a1c9be8f06df17dd",
+      "expected": {
+        "execution": "completed",
+        "input": 100,
+        "failedCommands": 0,
+        "repeatedCommands": 1
+      }
+    },
+    {
+      "file": "interrupted.jsonl",
+      "sha256": "e0c0f97b27c1ff447ce705937bb0b629f7ddca958bb62b1dbb0d1fa71df4f492",
+      "expected": {
+        "execution": "incomplete",
+        "input": null,
+        "failedCommands": 0,
+        "repeatedCommands": 0
+      }
+    },
+    {
+      "file": "completion-only.jsonl",
+      "sha256": "4cee74572c57493c26a08937ebcc3f639ec7fad1e6a2dbda0cbc593b176b39b5",
+      "expected": {
+        "execution": "completed",
+        "input": 100,
+        "failedCommands": 0,
+        "repeatedCommands": 0
+      }
+    }
+  ]
+}

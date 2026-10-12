@@ -83,3 +83,25 @@ There are no Codex config edits, skills, daemons, or telemetry to undo.
 Maintainers can run `npm run test:package` to test an isolated offline global
 install, demo/analyze/compare, spaces in paths, overwrite refusal, repeat-pack
 hash stability and uninstall. Its temporary prefix is removed automatically.
+
+
+## Open reports directly
+
+All three report commands accept `--open`:
+
+```sh
+codex-run-audit demo --out reports/first-look --open
+codex-run-audit analyze my-export.jsonl --out reports/my-run --open
+codex-run-audit compare baseline/report.json candidate/report.json --out reports/comparison --open
+```
+
+On macOS this explicitly opens Safari so an HTML editor association does not
+show source code. On Linux it uses `xdg-open`; desktop HTML associations determine
+the application. On a headless host or unsupported platform, opening may fail:
+the CLI warns, retains the completed report, prints a `file:` URL, and exits
+successfully. Paste that URL into a local browser. When connected to a remote
+host, transfer the report directory to your computer first. No server is started,
+no report is uploaded, and ordinary commands do not open applications.
+
+Browser launching is tested through process-boundary tests; automated WebKit
+checks do not establish that macOS Safari launched successfully.

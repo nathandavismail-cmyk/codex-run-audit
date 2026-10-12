@@ -1,0 +1,3 @@
+{"type":"thread.started"}
+{"type":"turn.started"}
+{"type":"item.started","item":{"id":"a","type":"command_execution","command":"npm test","status":"in_progress"}}
