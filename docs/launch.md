@@ -33,7 +33,7 @@ a distinct check from parser/renderer tests.
 
 Finish or explicitly narrow Linux/visual/tool support claims; configure a
 verified private security-reporting channel; review archive contents and commit
-metadata; run the consenting-developer pilot; publish evidence and limitations.
+metadata; publish evidence and limitations. Developer feedback is optional, not a release gate.
 Name searches and npm E404 are not legal clearance or package reservation.
 The project is independent of OpenAI. No invitations, public announcements, npm publication or GitHub releases have been made. Artifact storage was full during validation; synthetic screenshots can also be recovered from the bounded CI log output. Artifact-upload failure is reported separately and does not mask a failing test.
 

@@ -16,4 +16,16 @@ Only the latest 0.1.x preview is maintained. macOS and Ubuntu checks are recorde
 
 ## Reporting
 
-Do not put raw sessions, credentials or exploitable private details in public issues. Before public launch the maintainer must enable GitHub private vulnerability reporting and publish a verified private contact. The repository is currently private; a verified public-facing disclosure channel has not yet been configured. Public publication is blocked until this process exists.
+Do not put raw sessions, credentials or exploitable private details in public issues. The repository is currently private; no public-facing reporting endpoint is active.
+GitHub private vulnerability reporting is the intended disclosure channel when
+public distribution is authorized. It avoids requiring a separate public email
+address. A custom report form is prepared in `.github/VULNERABILITY_REPORT.yml`.
+
+At authorized public launch, enable the feature, verify the “Report a vulnerability”
+button at the repository Security → Advisories page, and link that verified page
+here before announcing availability. Do not submit a fake vulnerability just to
+test notifications. A prepared form does not mean the feature is enabled.
+
+GitHub documents this feature for public repositories:
+[private vulnerability reporting](https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/configure-vulnerability-reporting/configure-for-a-repository)
+(accessed 2026-10-11). We have not changed repository visibility to enable it.

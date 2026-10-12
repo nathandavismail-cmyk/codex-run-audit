@@ -29,5 +29,5 @@ scanning, autonomous repair, orchestration, and proven productivity improvements
 ## Optional
 
 - [Contributing](https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/CONTRIBUTING.md): Development and reproduction checks.
-- [v1 readiness](https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/docs/v1-readiness.md): Remaining human-validation and publication gates.
+- [v1 readiness](https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/docs/v1-readiness.md): Remaining compatibility and publication gates; developer feedback is optional.
 - [Pilot protocol](https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/docs/developer-pilot.md): Prepared methodology, not completed participant results.

@@ -23,9 +23,9 @@ jobs:
       - run: npm run test:package
       - run: npm run eval:fixtures
       - run: npm audit --audit-level=high
-      - name: Install Chromium and WebKit for this runner only
-        run: npx --no-install playwright install --with-deps chromium webkit
-      - run: npm run test:browser -- artifacts/browser --emit-screenshots --webkit
+      - name: Install browsers for this runner only
+        run: npx --no-install playwright install --with-deps chromium webkit firefox
+      - run: npm run test:browser -- artifacts/browser --emit-screenshots --all-browsers
       - name: Install pinned Codex in an isolated runner prefix
         run: |
           npm install --prefix "$RUNNER_TEMP/codex" --ignore-scripts --no-audit --no-fund @openai/codex@0.162.1

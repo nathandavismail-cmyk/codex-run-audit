@@ -1,6 +1,6 @@
 # Developer pilot and controlled comparisons
 
-Status: prepared, not conducted. No participants were contacted and no outcome
+Status: optional reference, not a release requirement (maintainer decision, 2026-10-11). Prepared, not conducted. No participants were contacted and no outcome
 improvement is claimed. Start with 3–5 consenting developers using local exports.
 
 ## Ready-to-run materials
@@ -62,9 +62,9 @@ wall time. Unknown model identity or incomparable budgets prevent a controlled
 model-efficiency conclusion. This protocol does not turn imported reports into
 signed evidence and does not run model tasks automatically.
 
-## Go/no-go criteria
+## Optional research criteria
 
-Proceed to a wider beta only after clean installation and removal are repeatable,
+If conducting this optional study, evaluate whether installation and removal are repeatable,
 at least one original incident yields a verified useful next action, and privacy
 review finds no raw-content exposure. Reconsider the product if testers prefer
 existing tools or cannot find a recurring use. Do not treat passing parser tests

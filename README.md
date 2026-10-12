@@ -179,8 +179,8 @@ npm run eval:fixtures -- reports/diagnosis-check
 ```
 
 The fixture runner generates HTML, JSON and Markdown results without model calls.
-These are implementation checks, not human benchmarks. A developer pilot packet
-is prepared; no external participant results are claimed.
+These are implementation checks, not human benchmarks. An optional developer pilot packet
+is prepared; feedback is not a release requirement and no participant results are claimed.
 
 [Contributing](CONTRIBUTING.md) · [Pilot protocol](docs/developer-pilot.md) · [Architecture](docs/architecture.md) · [Release checklist](docs/releasing.md)
 

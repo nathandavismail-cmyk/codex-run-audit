@@ -4,7 +4,7 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { chromium, webkit } from 'playwright';
+import { chromium, firefox, webkit } from 'playwright';
 
 const output = path.resolve(process.argv[2] ?? 'artifacts/browser');
 await mkdir(path.dirname(output), { recursive: true });
@@ -30,9 +30,11 @@ try {
     '--out',
     path.join(root, 'comparison'),
   ]);
-  const engines = process.argv.includes('--webkit')
-    ? [chromium, webkit]
-    : [chromium];
+  const engines = process.argv.includes('--all-browsers')
+    ? [chromium, webkit, firefox]
+    : process.argv.includes('--webkit')
+      ? [chromium, webkit]
+      : [chromium];
   for (const engine of engines) {
     browser = await engine.launch({ headless: true });
     const errors = [];
@@ -50,6 +52,14 @@ try {
           pathToFileURL(path.join(root, name, 'index.html')).href,
         );
         assert.equal(await page.locator('h1').count(), 1);
+        await page.keyboard.press('Tab');
+        assert.equal(
+          await page.locator(':focus').getAttribute('class'),
+          'skip',
+        );
+        await page.keyboard.press('Enter');
+        assert.ok(page.url().endsWith('#overview'));
+
         assert.ok(
           (await page.locator('body').innerText()).includes(
             'Synthetic demonstration',
