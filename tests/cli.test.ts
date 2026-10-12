@@ -16,9 +16,14 @@ import { readInput, writeBundle } from '../src/io.js';
 const cli = path.resolve('dist/src/cli.js');
 const invoke = (...args: string[]) =>
   spawnSync(process.execPath, [cli, ...args], { encoding: 'utf8' });
-test('help, version and invalid arguments have predictable exit codes', () => {
+test('help, version and invalid arguments have predictable exit codes', async () => {
   assert.equal(invoke('--help').status, 0);
-  assert.equal(invoke('--version').stdout.trim(), '0.1.0');
+  const metadata = JSON.parse(await readFile('package.json', 'utf8'));
+  const lock = JSON.parse(await readFile('package-lock.json', 'utf8'));
+  assert.equal(metadata.version, '1.0.0');
+  assert.equal(invoke('--version').stdout.trim(), metadata.version);
+  assert.equal(lock.version, metadata.version);
+  assert.equal(lock.packages[''].version, metadata.version);
   for (const args of [
     ['unknown'],
     ['demo'],

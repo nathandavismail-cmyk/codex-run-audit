@@ -12,7 +12,7 @@ JSON reports are not signed. An attacker who can replace reports can replace the
 
 ## Supported versions
 
-Only the latest 0.1.x preview is maintained. macOS and Ubuntu checks are recorded in [validation](docs/validation.md); Windows compatibility remains a separate gate. Do not assume cross-platform protection from POSIX-specific checks.
+The latest 1.x release line is supported. Version 1.0.0 is prepared but not yet published. macOS and Ubuntu checks are recorded in [validation](docs/validation.md); Windows compatibility remains a separate gate. Do not assume cross-platform protection from POSIX-specific checks.
 
 ## Reporting
 

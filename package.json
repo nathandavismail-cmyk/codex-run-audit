@@ -1,6 +1,6 @@
 {
   "name": "codex-run-audit",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Offline Codex run analyzer: token usage, command failures, timelines, and private HTML reports",
   "type": "module",
   "license": "MIT",
@@ -21,7 +21,8 @@
     "CHANGELOG.md",
     "CONTRIBUTING.md",
     "CODE_OF_CONDUCT.md",
-    "llms.txt"
+    "llms.txt",
+    "SUPPORT.md"
   ],
   "scripts": {
     "build": "tsc",

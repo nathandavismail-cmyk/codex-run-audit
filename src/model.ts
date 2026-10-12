@@ -1,4 +1,4 @@
-export const VERSION = '0.1.0';
+export const VERSION = '1.0.0';
 export interface Usage {
   input: number | null;
   cachedInput: number | null;

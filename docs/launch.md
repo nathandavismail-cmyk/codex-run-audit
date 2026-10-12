@@ -10,7 +10,7 @@ America/Los_Angeles. User approved the name **Codex Run Audit**.
 - Visibility: private, confirmed through GitHub after creation.
 - Description: Offline Codex run analyzer for token usage, command failures, timelines, and private HTML reports.
 - Topics include `codex`, `codex-cli`, `openai-codex`, `token-usage`, `agent-observability`, `jsonl`, `offline`, `html-report`, `typescript`, `cli`, `developer-tools`, and `observability`.
-- Default branch: `main`; license MIT; 0.1.0 remains unreleased.
+- Default branch: `main`; license MIT; 1.0.0 remains unreleased.
 - Existing source includes contributing/security/conduct policies and issue/PR templates.
 
 The reviewed history is pushed; package metadata has actual repository/homepage/issue URLs. A fresh authenticated remote clone passed clean installation, demo and package installation/removal checks. Do not publish to npm or create releases as part

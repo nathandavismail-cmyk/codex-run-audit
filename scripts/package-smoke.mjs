@@ -65,7 +65,7 @@ try {
   ]);
   const cli = path.join(prefix, 'bin', 'codex-run-audit');
   assert.match(execute(cli, ['--help']), /codex-run-audit analyze/);
-  assert.equal(execute(cli, ['--version']).trim(), '0.1.0');
+  assert.equal(execute(cli, ['--version']).trim(), '1.0.0');
   steps.push('offline isolated global install, help and version');
   const reportDir = path.join(root, 'my reports');
   await mkdir(reportDir);

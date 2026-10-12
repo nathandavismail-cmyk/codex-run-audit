@@ -1,6 +1,6 @@
 # v1 readiness
 
-Reviewed 2026-10-11. Keep the package at **0.1.0 unreleased / private preview**.
+Reviewed 2026-10-11. Version **1.0.0 is prepared, not published**. The stable scope is the explicit-export CLI and v1 report schemas described in [versioning](versioning.md).
 This checklist separates working implementation from unverified compatibility.
 Developer feedback is optional and is not required for release, per the maintainer’s
 2026-10-11 instruction. No productivity or usefulness improvement is claimed.
@@ -18,17 +18,17 @@ Developer feedback is optional and is not required for release, per the maintain
 | Security disclosure | GitHub private-report form prepared; enable and verify after authorized public visibility, before announcement |
 | Publication | Private repository authorized; npm, public visibility, tags/releases and announcements not authorized |
 
-## What must happen before v1
+## Public release scope and remaining actions
 
-1. Capture consented success, failure and interrupted native tool exports on a
-   host whose normal sandbox works. Record exact versions and privacy review.
-   Do not disable security controls to manufacture a passing result.
-2. Verify real Safari opening on macOS. WebKit on Ubuntu is useful engine
-   coverage, not Safari or macOS integration certification. Windows remains
-   outside the initial support claim.
-3. Obtain public-distribution approval, enable and verify GitHub private
-   vulnerability reporting at launch, and follow the release checklist. Do not relabel a private preview as v1 merely
-   because automated checks are green.
+The first public version is 1.0.0. Native tool execution, Safari opening, Windows,
+billing and outcome verification remain explicitly unverified or unsupported;
+1.0 does not expand those claims. Developer feedback is not required.
+
+Before publishing: approve public visibility, enable and verify GitHub private
+vulnerability reporting, update visibility/publication metadata to match the
+actual state, and follow the release checklist. Keep native/Safari limitations
+visible in the README and release notes. Broader compatibility requires future
+source-matched evidence on a suitable host, without weakening security controls.
 
 No new paid model runs, participant outreach, public releases, or system-wide
 configuration changes were performed during this readiness pass.

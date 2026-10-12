@@ -6,7 +6,7 @@ An offline Codex run analyzer for token usage, command failures, repeated activi
 and execution history. Get a local HTML report, inspect the evidence, and decide
 what to investigate next—without uploading your transcript or calling another model.
 
-**Private preview · Node.js 24+ · TypeScript · MIT · Zero runtime dependencies**
+**1.0.0 release candidate · Node.js 24+ · TypeScript · MIT · Zero runtime dependencies**
 
 [Quick start](#quick-start) · [What it shows](#what-it-shows) · [Commands](#commands) · [Compatibility](docs/compatibility.md) · [Contributing](CONTRIBUTING.md)
 
@@ -115,7 +115,7 @@ consume allowance; this analyzer does not launch it.
 
 ## What is verified today?
 
-This is **0.1.0, an unreleased private preview**, not a v1 stability claim.
+This is **1.0.0, prepared for its first public release; not yet published**. The [1.x compatibility policy](docs/versioning.md) defines the supported contract.
 
 | Check | Evidence |
 | --- | --- |
@@ -182,7 +182,7 @@ The fixture runner generates HTML, JSON and Markdown results without model calls
 These are implementation checks, not human benchmarks. An optional developer pilot packet
 is prepared; feedback is not a release requirement and no participant results are claimed.
 
-[Contributing](CONTRIBUTING.md) · [Pilot protocol](docs/developer-pilot.md) · [Architecture](docs/architecture.md) · [Release checklist](docs/releasing.md)
+[Contributing](CONTRIBUTING.md) · [Support](SUPPORT.md) · [Pilot protocol](docs/developer-pilot.md) · [Architecture](docs/architecture.md) · [Release checklist](docs/releasing.md)
 
 For tooling and documentation retrieval: [documentation index](llms.txt) and
 [machine-readable project facts](docs/project-facts.json).

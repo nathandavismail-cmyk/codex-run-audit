@@ -31,7 +31,7 @@ provided project release archive, verifying its checksum against its source.
 Install the archive you actually downloaded:
 
 ```sh
-npm install --global --ignore-scripts ./codex-run-audit-0.1.0.tgz
+npm install --global --ignore-scripts ./codex-run-audit-1.0.0.tgz
 codex-run-audit --version
 codex-run-audit demo --out reports/installed-demo
 ```

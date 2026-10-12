@@ -310,7 +310,9 @@ test('comparisons remain descriptive and never infer task success from savings',
     type: 'turn.failed',
     usage: { input_tokens: 10, output_tokens: 1 },
   });
-  const c = compareReports(a, b);
+  const c = compareReports({ ...a, generator: '0.1.0' }, b);
+  assert.equal(c.generator, '1.0.0');
+  assert.equal(c.schema, 'runlens.comparison/v1');
   assert.equal(c.delta.input, -90);
   assert.equal(c.delta.cachedInput, null);
   assert.equal(c.verdict, 'descriptive-only');

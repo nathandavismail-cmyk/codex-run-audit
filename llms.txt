@@ -2,7 +2,7 @@
 
 > An offline TypeScript CLI that turns an explicit Codex execution JSONL export into local HTML and JSON reports for token accounting, command failures, repeated activity, and source-order timelines.
 
-Version 0.1.0 is an unreleased private preview. The GitHub repository requires
+Version 1.0.0 is prepared for first public release, but remains unpublished. The GitHub repository requires
 access; no npm package or public release exists. Node.js 24+ is required. MIT
 license. Zero runtime dependencies. Independent of OpenAI.
 
@@ -25,6 +25,9 @@ scanning, autonomous repair, orchestration, and proven productivity improvements
 - [Validation](https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/docs/validation.md): Actual checks and their limits.
 - [Security](https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/SECURITY.md): Privacy boundaries and disclosure status.
 - [Project facts](https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/docs/project-facts.json): Structured product identity and limitations.
+
+- [1.x stability policy](https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/docs/versioning.md): Stable commands, schemas and supported scope.
+- [Support](https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/SUPPORT.md): Troubleshooting and safe issue reporting.
 
 ## Optional
 

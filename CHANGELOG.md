@@ -2,7 +2,7 @@
 
 Changes follow semantic versioning. Until 1.0, minor releases may revise adapter support; machine-readable schema revisions are explicit.
 
-## 0.1.0 — Unreleased
+## 1.0.0 — Unreleased
 
 - Make developer feedback optional rather than a release gate.
 - Prepare GitHub private vulnerability reporting for an authorized public launch.

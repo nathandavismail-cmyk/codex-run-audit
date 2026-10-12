@@ -2,11 +2,11 @@
   "schema": "codex-run-audit.project-facts/v1",
   "name": "Codex Run Audit",
   "package_name": "codex-run-audit",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Offline Codex run analyzer: token usage, command failures, timelines, and private HTML reports",
   "repository": "https://github.com/nathandavismail-cmyk/codex-run-audit",
   "repository_visibility": "private",
-  "release_status": "unreleased-preview",
+  "release_status": "prepared-unpublished",
   "npm_published": false,
   "license": "MIT",
   "language": "TypeScript",
@@ -58,5 +58,6 @@
       390
     ],
     "keyboard_skip_link": true
-  }
+  },
+  "stability_policy": "docs/versioning.md"
 }

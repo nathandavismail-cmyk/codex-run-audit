@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Installation and support
+    url: https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/SUPPORT.md
+    about: Check supported formats and troubleshooting before filing an issue.
+  - name: Security reporting instructions
+    url: https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/SECURITY.md
+    about: Do not disclose vulnerabilities or private transcripts in a public issue.
