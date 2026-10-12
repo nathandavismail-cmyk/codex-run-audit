@@ -30,10 +30,10 @@ exist. Keep fixture hashes and expected observations reviewed together; never
 present conformance results as human or model benchmarks. Pilot materials are
 in `evals/diagnosis/` and the protocol is in `docs/developer-pilot.md`.
 
-The approved manual Ubuntu workflow runs Chromium and WebKit serially at desktop
+The approved manual Ubuntu workflow runs Chromium, WebKit and Firefox serially at desktop
 and mobile viewport sizes. To reproduce on a suitable test host, install the
 pinned Playwright browser binaries and run
-`npm run test:browser -- /path/to/new-browser-results --webkit` after building.
+`npm run test:browser -- /path/to/new-browser-results --all-browsers` after building.
 Browser installation downloads substantial test-only dependencies; no browser
 binary or runtime dependency is shipped in the CLI package. WebKit testing on
 Linux does not establish Safari integration on macOS.

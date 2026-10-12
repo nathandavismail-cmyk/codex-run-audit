@@ -4,6 +4,10 @@ Changes follow semantic versioning. Until 1.0, minor releases may revise adapter
 
 ## 0.1.0 — Unreleased
 
+- Make developer feedback optional rather than a release gate.
+- Prepare GitHub private vulnerability reporting for an authorized public launch.
+- Extend manual Ubuntu browser coverage to Firefox and verify keyboard access to the skip link.
+
 - Add opt-in `--open` for generated reports, encoded browser URLs and recoverable headless-launch failures.
 - Extend the approved manual Ubuntu browser checks to WebKit as well as Chromium; fix narrow-screen metric wrapping found by WebKit.
 - Add five checksum-pinned synthetic diagnosis cases, a conformance runner and separate participant/facilitator pilot materials.

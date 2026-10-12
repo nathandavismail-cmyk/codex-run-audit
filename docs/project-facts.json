@@ -44,5 +44,19 @@
   ],
   "documentation": "https://github.com/nathandavismail-cmyk/codex-run-audit/blob/main/llms.txt",
   "verified_on": "2026-10-11",
-  "developer_feedback_required_for_release": false
+  "developer_feedback_required_for_release": false,
+  "browser_checks": {
+    "platform": "Ubuntu",
+    "engines": [
+      "Chromium",
+      "WebKit",
+      "Firefox"
+    ],
+    "scenarios": 18,
+    "viewports": [
+      1280,
+      390
+    ],
+    "keyboard_skip_link": true
+  }
 }

@@ -27,7 +27,7 @@ Date: 2026-10-11. Environment: macOS / Darwin arm64, Node 24.21.0, npm 11.19.0.
 
 ## Not established
 
-- Actual macOS Safari, Firefox, and Windows browser coverage. Linux WebKit does not establish Safari integration.
+- Actual macOS Safari and Windows browser coverage. Linux WebKit does not establish Safari integration.
 - Successful real-model tool execution, live provider-failure coverage, private-history import, measured outcome improvement or subscription-cost reconciliation. The successful no-tool run and mocked provider failure do not establish these; attempted live tools were sandbox-blocked.
 - Windows execution. Ubuntu checks passed separately; this does not establish all Linux distributions.
 - Package provenance, public GitHub configuration, npm publication or a public release. The user approved a private repository and manual Ubuntu workflow; see launch documentation.
@@ -64,3 +64,20 @@ The demo and automated fixtures are synthetic. Their numeric values establish ex
   layout passed and its screenshot was inspected.
   [Workflow evidence](https://github.com/nathandavismail-cmyk/codex-run-audit/actions/runs/38199890375).
   The native tool probes still explicitly report sandbox-blocked execution.
+
+
+## Final compatibility pass
+
+Developer feedback was explicitly removed as a release requirement on 2026-10-11.
+The optional research materials remain available; usefulness is still unmeasured.
+A native-app inventory reported Safari running, but accessing its window returned
+`cgWindowNotFound`. This does not establish successful Safari report rendering.
+The sandbox-blocked native command probes remain unresolved; controls were not
+weakened and no paid model task was run to retry them.
+
+Final [manual Ubuntu run](https://github.com/nathandavismail-cmyk/codex-run-audit/actions/runs/38202572750)
+passed all 37 tests, package checks, five fixtures, dependency audit and **18**
+Chromium/WebKit/Firefox desktop/mobile scenarios. The browser checks also exercised
+keyboard Tab/Enter access to the skip link, with reduced motion. No page errors
+or external requests were recorded. This is targeted keyboard coverage, not a
+full accessibility certification. Native tools remained explicitly sandbox-blocked.

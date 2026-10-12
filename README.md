@@ -121,7 +121,7 @@ This is **0.1.0, an unreleased private preview**, not a v1 stability claim.
 | --- | --- |
 | CLI and accounting | 37 tests pass on Ubuntu; 36 pass and one Linux-only test skips on macOS |
 | Developer installation | Clean installation, isolated package installation/removal, overwrite protection and report preservation |
-| Report rendering | 12 desktop/mobile scenarios across Chromium and WebKit on Ubuntu |
+| Report rendering | 18 desktop/mobile scenarios across Chromium, WebKit and Firefox on Ubuntu |
 | Reproducible examples | Five original checksum-pinned diagnosis fixtures with machine-readable results |
 | Native Codex | Mock-provider success/failure probes and one prior real no-tool smoke test |
 | Still unverified | Successful native tool execution on a compatible host, actual Safari launch, Windows, and measured developer usefulness |
