@@ -4,11 +4,18 @@
 
 Codex Run Audit turns an explicitly selected Codex execution export into a private, local report. Inspect recorded token usage, command failures, repeated commands and event order. Compare two exports without treating lower token use as proof of better work.
 
-**Status: 0.1.0 local preview.** Working CLI, standalone HTML/JSON reports, 34 tests, an isolated package-install/uninstall check, native success/failure probes using a synthetic local provider, and one successful real-model export smoke test. Live tool probes were sandbox-blocked; tool compatibility remains unverified. Not published to npm or GitHub. No live-model benchmark or broad compatibility certification yet. The name is not trademark-cleared.
+**Status: 0.1.0 local preview.** Working CLI, standalone HTML/JSON reports, 34 tests, an isolated package-install/uninstall check, native success/failure probes using a synthetic local provider, and one successful real-model export smoke test. Live tool probes were sandbox-blocked; tool compatibility remains unverified. Available in the private GitHub repository; not published to npm. No live-model benchmark or broad compatibility certification yet. The name is not trademark-cleared.
 
 ## Try the demo
 
-Requires Node.js 24 or later. From this repository:
+Requires Node.js 24 or later and access to the private repository:
+
+```sh
+gh repo clone nathandavismail-cmyk/codex-run-audit
+cd codex-run-audit
+```
+
+Then:
 
 ```sh
 npm ci

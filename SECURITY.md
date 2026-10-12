@@ -16,4 +16,4 @@ Only the latest 0.1.x preview is maintained. macOS local tests are recorded in [
 
 ## Reporting
 
-Do not put raw sessions, credentials or exploitable private details in public issues. Before public launch the maintainer must enable GitHub private vulnerability reporting and publish a verified private contact. Neither is currently configured because this repository has not been published. Public publication is blocked until this process exists.
+Do not put raw sessions, credentials or exploitable private details in public issues. Before public launch the maintainer must enable GitHub private vulnerability reporting and publish a verified private contact. The repository is currently private; a verified public-facing disclosure channel has not yet been configured. Public publication is blocked until this process exists.

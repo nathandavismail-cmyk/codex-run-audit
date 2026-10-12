@@ -12,7 +12,7 @@ Tests belong in `tests/`. Use original synthetic events and disposable directori
 
 Explain the user problem, resulting behavior, evidence/format boundaries, and validation. Keep unrelated changes separate. Update documentation when a supported format or measurement changes. Do not weaken unknown states to make dashboards look complete.
 
-Run `npm run check`; for CLI/package changes also run `npm pack` and test the resulting tarball in a clean directory. Do not add GitHub Actions without maintainer approval. No workflow is shipped in this preview.
+Run `npm run check`; for CLI/package changes also run `npm pack` and test the resulting tarball in a clean directory. Do not add GitHub Actions without maintainer approval. The approved Ubuntu workflow is manual-only, with a 10-minute timeout and no model calls.
 
 `npm run test:package` automates package installation, representative commands,
 overwrite refusal and removal in a disposable prefix. It uses no model calls.

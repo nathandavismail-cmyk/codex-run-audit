@@ -1,6 +1,6 @@
 # Local release preparation
 
-No package or remote release is currently published. Keep 0.1.0 marked unreleased until publication is authorized.
+The source repository is private on GitHub; no npm package or GitHub release is published. Keep 0.1.0 marked unreleased until publication is authorized.
 
 1. Review the source diff, release notes, license and supported-format claims.
 2. From a clean checkout with Node 24: `npm ci`, then `npm run check`.

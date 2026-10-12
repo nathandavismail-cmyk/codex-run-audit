@@ -227,26 +227,46 @@ stream_max_retries = 0
       reasoningOutput: toolMode ? 10 : 5,
     });
   }
+  let toolOutcome = 'not-requested';
   if (toolMode) {
-    console.log('SYNTHETIC_TOOL_EVIDENCE ' + JSON.stringify(toolEvidence));
-    console.log('SYNTHETIC_EXPORT ' + scrubbed.replaceAll('\n', ' '));
-    assert.equal(
-      report.activity.commands,
-      1,
-      'Expected exactly one completed command event',
-    );
-    assert.equal(report.activity.failedCommands, failCommand ? 1 : 0);
-    const events = scrubbed
-      .trim()
-      .split('\n')
-      .map((line) => JSON.parse(line));
-    const command = events.find(
-      (e) =>
-        e.type === 'item.completed' && e.item?.type === 'command_execution',
-    );
-    assert.equal(command.item.exit_code, failCommand ? 7 : 0);
-    if (!failCommand)
-      assert.ok(command.item.aggregated_output.includes('CODEX_AUDIT_TOOL_OK'));
+    console.log(`SYNTHETIC_TOOL_EVIDENCE ${JSON.stringify(toolEvidence)}`);
+    assert.equal(toolEvidence.length, 1, 'Expected one native tool response');
+    const detail = toolEvidence[0].output;
+    const knownSandboxBlock =
+      typeof detail === 'string' &&
+      (detail.includes(
+        'bwrap: loopback: Failed RTM_NEWADDR: Operation not permitted',
+      ) ||
+        detail.includes(
+          'sandbox-exec: sandbox_apply: Operation not permitted',
+        ));
+    if (knownSandboxBlock && report.activity.commands === 0) {
+      toolOutcome = 'blocked-by-host-sandbox';
+      console.log(
+        'NATIVE_TOOL_BLOCKED: Host sandbox prevented execution; tool compatibility NOT verified.',
+      );
+    } else {
+      assert.equal(
+        report.activity.commands,
+        1,
+        'Expected exactly one completed command event',
+      );
+      assert.equal(report.activity.failedCommands, failCommand ? 1 : 0);
+      const events = scrubbed
+        .trim()
+        .split('\n')
+        .map((line) => JSON.parse(line));
+      const command = events.find(
+        (e) =>
+          e.type === 'item.completed' && e.item?.type === 'command_execution',
+      );
+      assert.equal(command.item.exit_code, failCommand ? 7 : 0);
+      if (!failCommand)
+        assert.ok(
+          command.item.aggregated_output.includes('CODEX_AUDIT_TOOL_OK'),
+        );
+      toolOutcome = 'verified';
+    }
   }
   await writeFile(
     join(output, 'metadata.json'),
@@ -261,6 +281,7 @@ stream_max_retries = 0
         provider: 'loopback mock; no model inference',
         scenario: process.argv[3] ?? 'success',
         requests,
+        toolOutcome,
         reportUsage: report.usage,
       },
       null,

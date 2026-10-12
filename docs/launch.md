@@ -1,29 +1,25 @@
 # Launch preparation
 
-Status: local release candidate, not published. Reviewed 2026-10-11 in
+Status: private GitHub repository created and pushed with explicit user approval; npm/public release pending. Reviewed 2026-10-11 in
 America/Los_Angeles. User approved the name **Codex Run Audit**.
 
-## Proposed GitHub setup
+## GitHub setup
 
 - Owner: `nathandavismail-cmyk`, verified through the connected GitHub account.
-- Repository: `codex-run-audit`; metadata lookup returned 404 at review time.
-- Initial visibility: private, pending owner approval.
+- Repository: [codex-run-audit](https://github.com/nathandavismail-cmyk/codex-run-audit).
+- Visibility: private, confirmed through GitHub after creation.
 - Description: Offline reports for Codex execution exports, with conservative token accounting and evidence-based follow-up guidance.
 - Topics: `codex`, `typescript`, `cli`, `developer-tools`, `observability`.
 - Default branch: `main`; license MIT; 0.1.0 remains unreleased.
 - Existing source includes contributing/security/conduct policies and issue/PR templates.
 
-After creation is approved: push the reviewed local history, add real repository,
-homepage and issue URLs to package metadata, clone the remote into a fresh
-directory, and repeat the install/demo/package tests. Do not claim remote
-installation before that check. Do not publish to npm or create releases as part
+The reviewed history is pushed; package metadata has actual repository/homepage/issue URLs. A fresh authenticated remote clone passed clean installation, demo and package installation/removal checks. Do not publish to npm or create releases as part
 of repository creation alone. Older development commits retain their original
 inferred author metadata; history has not been rewritten.
 
-## Proposed opt-in Ubuntu validation
+## Approved opt-in Ubuntu validation
 
-Requires separate approval because the user prohibited creating workflows
-without permission. No workflow file has been created.
+The user explicitly approved creation and execution. The workflow is `.github/workflows/validate.yml`; it never runs on pushes or pull requests.
 
 One manually dispatched `ubuntu-latest` job, read-only repository permission,
 Node 24, 10-minute timeout, no push/PR schedule or macOS runner. Run clean install,
@@ -39,5 +35,4 @@ Finish or explicitly narrow Linux/visual/tool support claims; configure a
 verified private security-reporting channel; review archive contents and commit
 metadata; run the consenting-developer pilot; publish evidence and limitations.
 Name searches and npm E404 are not legal clearance or package reservation.
-The project is independent of OpenAI. No invitations, announcements, new remote
-repository, workflow, or publication have been sent or created in this review.
+The project is independent of OpenAI. No invitations, public announcements, npm publication or GitHub releases have been made. Artifact storage was full during validation; synthetic screenshots can also be recovered from the bounded CI log output. Artifact-upload failure is reported separately and does not mask a failing test.

@@ -51,6 +51,18 @@ try {
       );
       assert.equal(await page.locator('script').count(), 0);
       assert.ok(
+        await page
+          .locator('.metric')
+          .evaluateAll((elements) =>
+            elements.every(
+              (element) =>
+                element.clientHeight <=
+                Number.parseFloat(getComputedStyle(element).lineHeight) + 1,
+            ),
+          ),
+        `${name} wraps a metric at ${width}px`,
+      );
+      assert.ok(
         await page.evaluate(
           () => document.documentElement.scrollWidth <= window.innerWidth,
         ),

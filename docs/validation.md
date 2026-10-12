@@ -25,7 +25,7 @@ Date: 2026-10-11. Environment: macOS / Darwin arm64, Node 24.21.0, npm 11.19.0.
 - Browser visual inspection: no attached browser was available and native Safari inspection failed. HTML content/escaping tests passed; visual review remains pending.
 - Successful real-model tool execution, live provider-failure coverage, private-history import, measured outcome improvement or subscription-cost reconciliation. The successful no-tool run and mocked provider failure do not establish these; attempted live tools were sandbox-blocked.
 - Linux or Windows execution. Docker and Podman are unavailable on this host. Do not interpret macOS tests as cross-platform certification.
-- Package provenance, remote GitHub installation, public GitHub configuration, publication or CI. No GitHub Actions workflow was created.
+- Package provenance, public GitHub configuration, npm publication or a public release. The user approved a private repository and manual Ubuntu workflow; see launch documentation.
 
 ## Developer installation review
 
@@ -35,6 +35,6 @@ remain compatible. Installation and removal instructions, static next-step
 guidance, and a developer pilot protocol are now included. A maintainer simulated
 the new-developer journey locally; no external participant feedback is claimed.
 New local commits use the verified GitHub account's noreply identity; earlier
-development history is preserved. All review changes remain local.
+development history is preserved. The user approved pushing the reviewed history to a private GitHub repository. A fresh remote clone passed clean install, demo and package checks.
 
 The demo and automated fixtures are synthetic. Their numeric values establish expected fixture behavior only. The separate real-model smoke test remains local; its raw capture is excluded from source and package archives. See [compatibility](compatibility.md) for coverage limits.

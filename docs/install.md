@@ -3,13 +3,12 @@
 Requires Node.js 24+ and npm. Check `node --version` before installing. Codex
 itself is only needed to capture new exports, not to run this analyzer.
 macOS arm64 is tested; Linux and Windows remain separate validation gates.
-The project is not yet published to npm or GitHub. Never install an unrelated
+The GitHub repository is private; access is required. The package is not published to npm. Never install an unrelated
 package merely because its name matches a draft project name.
 
 ## Source checkout or source ZIP
 
-Once a GitHub repository exists, copy its exact clone URL from the Code button,
-clone it, and change into that directory. For the local source ZIP, extract it
+Clone `https://github.com/nathandavismail-cmyk/codex-run-audit` using your authorized GitHub credentials and change into that directory. For the local source ZIP, extract it
 and change into `codex-run-audit/`. Then:
 
 ```sh
@@ -47,7 +46,7 @@ invoke `./node_modules/.bin/codex-run-audit` from that project on macOS/Linux.
 Direct npm installation from a trusted Git URL also builds through `prepare`.
 It requires development dependencies and enabled lifecycle scripts. Pin a
 reviewed commit rather than a moving branch. A local Git transport was tested;
-remote GitHub transport remains untested until a repository is published.
+a fresh authenticated GitHub clone also passed clean install, demo and package tests.
 Some npm versions warn about unapproved lifecycle scripts. Review the source
 before enabling any script; the prebuilt archive is the script-free installation
 path. Do not globally approve arbitrary install scripts to silence a warning.
