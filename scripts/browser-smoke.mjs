@@ -50,6 +50,16 @@ try {
         ),
       );
       assert.equal(await page.locator('script').count(), 0);
+      for (const anchor of await page.locator('nav a').all()) {
+        const href = await anchor.getAttribute('href');
+        assert.equal(await page.locator(href).count(), 1);
+      }
+      assert.equal(await page.locator('a[href="report.json"]').count(), 1);
+      const exported = JSON.parse(
+        await readFile(path.join(root, name, 'report.json'), 'utf8'),
+      );
+      assert.ok(exported.schema.startsWith('runlens.'));
+
       assert.ok(
         await page
           .locator('.metric')

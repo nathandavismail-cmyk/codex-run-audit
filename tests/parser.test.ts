@@ -401,7 +401,13 @@ test('HTML exposes known per-turn values when whole-run usage is unknown', () =>
   assert.equal(r.usage.input, null);
   const html = renderReport(r);
   assert.match(html, /Per-turn measurements/);
-  assert.match(html, /<td>1<\/td><td>completed<\/td><td>100<\/td>/);
-  assert.match(html, /<td>2<\/td><td>failed<\/td><td>Unknown<\/td>/);
+  assert.match(
+    html,
+    /<td>1<\/td><td><span class="status completed">completed<\/span><\/td><td>100<\/td>/,
+  );
+  assert.match(
+    html,
+    /<td>2<\/td><td><span class="status failed">failed<\/span><\/td><td>Unknown<\/td>/,
+  );
   assert.match(html, /href="report.json"/);
 });
